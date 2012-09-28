@@ -42,7 +42,12 @@ namespace Pulsar4X.WinForms.Forms
         private void SubForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             // we need to remove any tabs/conrols before closing:
-            //MainPanel.Controls
+            Pulsar4X.WinForms.Controls.DraggableTabControl oTabControl = Pulsar4X.WinForms.Controls.UIController.GetDraggableTabControl(this);
+
+            while (oTabControl.TabPages.Count > 0)
+            {
+                oTabControl.TabPages.RemoveAt(0);
+            }
         }
     }
 }
