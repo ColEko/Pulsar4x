@@ -83,7 +83,8 @@ namespace Pulsar4X.WinForms
                                                 "Forums:\n http://aurora2.pentarch.org/index.php/board,169.0.html \n\n" +
                                                 "Wiki:\n http://pulsar4x.pentarch.org/wiki/index.php?title=Main_Page \n\n" +
                                                 "GitHub Org:\n https://github.com/Pulsar4xDevs \n\n" +
-                                                "Left: Image of the Crab Nebula (a Pulsar ;), Credit to NASA and Hubble";
+                                                "Left: Image of the Crab Nebula (a Pulsar ;), Credit to NASA and Hubble\n" +
+                                                "Icons: Creadit to FamFamFam Silk icon pack by Mark James: \n http://www.famfamfam.com/lab/icons/silk/ ";
 
 
         public const float ZOOM_DEFAULT_SCALLER = 1.0f;

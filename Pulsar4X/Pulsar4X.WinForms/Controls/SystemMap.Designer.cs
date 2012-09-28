@@ -127,11 +127,11 @@
             // PanRightButton
             // 
             this.PanRightButton.ForeColor = System.Drawing.Color.Black;
+            this.PanRightButton.Image = global::Pulsar4X.Properties.Resources.arrow_right;
             this.PanRightButton.Location = new System.Drawing.Point(58, 44);
             this.PanRightButton.Name = "PanRightButton";
             this.PanRightButton.Size = new System.Drawing.Size(26, 23);
             this.PanRightButton.TabIndex = 6;
-            this.PanRightButton.Text = "->";
             this.InfoToolTip.SetToolTip(this.PanRightButton, "Pan Right (D)");
             this.PanRightButton.UseVisualStyleBackColor = true;
             this.PanRightButton.Click += new System.EventHandler(this.PanRightButton_Click);
@@ -151,11 +151,11 @@
             // PanUpButton
             // 
             this.PanUpButton.ForeColor = System.Drawing.Color.Black;
+            this.PanUpButton.Image = global::Pulsar4X.Properties.Resources.arrow_up;
             this.PanUpButton.Location = new System.Drawing.Point(34, 18);
             this.PanUpButton.Name = "PanUpButton";
             this.PanUpButton.Size = new System.Drawing.Size(23, 23);
             this.PanUpButton.TabIndex = 3;
-            this.PanUpButton.Text = "^";
             this.InfoToolTip.SetToolTip(this.PanUpButton, "Pan Up (W)");
             this.PanUpButton.UseVisualStyleBackColor = true;
             this.PanUpButton.Click += new System.EventHandler(this.PanUpButton_Click);
@@ -163,11 +163,11 @@
             // PanLeftButton
             // 
             this.PanLeftButton.ForeColor = System.Drawing.Color.Black;
+            this.PanLeftButton.Image = global::Pulsar4X.Properties.Resources.arrow_left;
             this.PanLeftButton.Location = new System.Drawing.Point(8, 44);
             this.PanLeftButton.Name = "PanLeftButton";
             this.PanLeftButton.Size = new System.Drawing.Size(26, 23);
             this.PanLeftButton.TabIndex = 4;
-            this.PanLeftButton.Text = "<-";
             this.InfoToolTip.SetToolTip(this.PanLeftButton, "Pan Left (A)");
             this.PanLeftButton.UseVisualStyleBackColor = true;
             this.PanLeftButton.Click += new System.EventHandler(this.PanLeftButton_Click);
@@ -175,11 +175,11 @@
             // ZoomOutButton
             // 
             this.ZoomOutButton.ForeColor = System.Drawing.Color.Black;
+            this.ZoomOutButton.Image = global::Pulsar4X.Properties.Resources.zoom_out;
             this.ZoomOutButton.Location = new System.Drawing.Point(114, 18);
             this.ZoomOutButton.Name = "ZoomOutButton";
             this.ZoomOutButton.Size = new System.Drawing.Size(23, 23);
             this.ZoomOutButton.TabIndex = 8;
-            this.ZoomOutButton.Text = "-";
             this.InfoToolTip.SetToolTip(this.ZoomOutButton, "Zoom out (Q or -)");
             this.ZoomOutButton.UseVisualStyleBackColor = true;
             this.ZoomOutButton.Click += new System.EventHandler(this.ZoomOutButton_Click);
@@ -187,11 +187,11 @@
             // PanDownButton
             // 
             this.PanDownButton.ForeColor = System.Drawing.Color.Black;
+            this.PanDownButton.Image = global::Pulsar4X.Properties.Resources.arrow_down;
             this.PanDownButton.Location = new System.Drawing.Point(33, 73);
             this.PanDownButton.Name = "PanDownButton";
             this.PanDownButton.Size = new System.Drawing.Size(23, 23);
             this.PanDownButton.TabIndex = 5;
-            this.PanDownButton.Text = "v";
             this.InfoToolTip.SetToolTip(this.PanDownButton, "Pan Down (S)");
             this.PanDownButton.UseVisualStyleBackColor = true;
             this.PanDownButton.Click += new System.EventHandler(this.PanDownButton_Click);
@@ -199,11 +199,11 @@
             // ZoomInButton
             // 
             this.ZoomInButton.ForeColor = System.Drawing.Color.Black;
+            this.ZoomInButton.Image = global::Pulsar4X.Properties.Resources.zoom_in;
             this.ZoomInButton.Location = new System.Drawing.Point(155, 19);
             this.ZoomInButton.Name = "ZoomInButton";
             this.ZoomInButton.Size = new System.Drawing.Size(23, 23);
             this.ZoomInButton.TabIndex = 7;
-            this.ZoomInButton.Text = "+";
             this.InfoToolTip.SetToolTip(this.ZoomInButton, "Zoom in (E or +)");
             this.ZoomInButton.UseVisualStyleBackColor = true;
             this.ZoomInButton.Click += new System.EventHandler(this.ZoomInButton_Click);

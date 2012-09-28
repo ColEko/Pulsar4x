@@ -28,14 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.MainMenu = new System.Windows.Forms.MenuStrip();
             this.gameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.spaceMasterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.spaceMasterOnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.spaceMasterOffToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.empiresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.systemMapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.systemInformationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.calculationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gameParametersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -45,6 +44,8 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainPanel = new System.Windows.Forms.Panel();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.systemMapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -76,14 +77,6 @@
             this.gameToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.G)));
             this.gameToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
             this.gameToolStripMenuItem.Text = "&Game";
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.X)));
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.exitToolStripMenuItem.Text = "E&xit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // spaceMasterToolStripMenuItem
             // 
@@ -117,16 +110,9 @@
             this.empiresToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
             this.empiresToolStripMenuItem.Text = "&Empire";
             // 
-            // systemMapToolStripMenuItem
-            // 
-            this.systemMapToolStripMenuItem.Name = "systemMapToolStripMenuItem";
-            this.systemMapToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F3;
-            this.systemMapToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
-            this.systemMapToolStripMenuItem.Text = "System Map";
-            this.systemMapToolStripMenuItem.Click += new System.EventHandler(this.systemMapToolStripMenuItem_Click);
-            // 
             // systemInformationToolStripMenuItem
             // 
+            this.systemInformationToolStripMenuItem.Image = global::Pulsar4X.Properties.Resources.application_view_columns;
             this.systemInformationToolStripMenuItem.Name = "systemInformationToolStripMenuItem";
             this.systemInformationToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F9;
             this.systemInformationToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
@@ -196,6 +182,24 @@
             this.MainPanel.Size = new System.Drawing.Size(1008, 706);
             this.MainPanel.TabIndex = 2;
             // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Image = global::Pulsar4X.Properties.Resources.door_out;
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.X)));
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.exitToolStripMenuItem.Text = "E&xit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // systemMapToolStripMenuItem
+            // 
+            this.systemMapToolStripMenuItem.Image = global::Pulsar4X.Properties.Resources.application_view_gallery;
+            this.systemMapToolStripMenuItem.Name = "systemMapToolStripMenuItem";
+            this.systemMapToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F3;
+            this.systemMapToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.systemMapToolStripMenuItem.Text = "System Map";
+            this.systemMapToolStripMenuItem.Click += new System.EventHandler(this.systemMapToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -205,6 +209,7 @@
             this.ClientSize = new System.Drawing.Size(1008, 730);
             this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.MainMenu);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.MainMenu;
             this.Name = "MainForm";
             this.Text = "Pulsar4X";
