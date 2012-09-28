@@ -52,6 +52,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SubForm";
             this.Text = "SubForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SubForm_FormClosing);
             this.Load += new System.EventHandler(this.SubForm_Load);
             this.Resize += new System.EventHandler(this.SubForm_Resize);
             this.ResumeLayout(false);

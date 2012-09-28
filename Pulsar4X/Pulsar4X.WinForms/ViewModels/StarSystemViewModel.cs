@@ -23,7 +23,8 @@ namespace Pulsar4X.WinForms.ViewModels
                 _currentstarsystem = value;
                 //NotifyPropertyChanged("CurrentStarSystem");
                 OnPropertyChanged(() => CurrentStarSystem);
-                CurrentStarSystemAge = _currentstarsystem.Stars[0].Age.ToString();
+                //CurrentStarSystemAge = _currentstarsystem.Stars[0].Age.ToString();
+                CurrentStarSystemAge = (Math.Floor(_currentstarsystem.Stars[0].Age / 1000000)).ToString() + " Myr";
                 Stars = new BindingList<Star>(_currentstarsystem.Stars);
                 StarsSource.DataSource = Stars;
                 OnPropertyChanged(() => Stars);

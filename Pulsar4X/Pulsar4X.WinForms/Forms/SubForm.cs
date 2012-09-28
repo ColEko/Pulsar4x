@@ -38,5 +38,11 @@ namespace Pulsar4X.WinForms.Forms
                 control.Size = MainPanel.Size; // this will edit the size of any sub forms. there will generall only be the one DraggableTabControl.
             }
         }
+
+        private void SubForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // we need to remove any tabs/conrols before closing:
+            //MainPanel.Controls
+        }
     }
 }
