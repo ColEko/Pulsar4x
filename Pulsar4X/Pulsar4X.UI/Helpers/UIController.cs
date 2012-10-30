@@ -29,6 +29,20 @@ namespace Pulsar4X.UI.Helpers
         public bool IsRunningOnMono { get; set; }
 
 
+        Handlers.SystemGenAndDisplay m_oSystemGenAndDisplay;
+
+        /// <summary>
+        /// Handler for all the System Information and Generation Panels, can be used to control them all or just individual ones.
+        /// </summary>
+        public Handlers.SystemGenAndDisplay SystemGenAndDisplay
+        {
+            get
+            {
+                return m_oSystemGenAndDisplay;
+            }
+        }
+        
+
 
         /// <summary>
         /// Constructor that prevents a default instance of this class from being created.
@@ -51,6 +65,9 @@ namespace Pulsar4X.UI.Helpers
             {
                 IsRunningOnMono = false;
             }
+
+            // now init ui handlers
+            m_oSystemGenAndDisplay = new Handlers.SystemGenAndDisplay();
         }
     }
 }

@@ -36,7 +36,24 @@ namespace Pulsar4X.UI.Forms
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-
+            // Setup Events:
+            exitToolStripMenuItem.Click += new EventHandler(exitToolStripMenuItem_Click);
+            systemInformationToolStripMenuItem.Click += new EventHandler(systemInformationToolStripMenuItem_Click);
         }
+
+        #region MenuAndToolStripEvents
+
+        void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        void systemInformationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Helpers.UIController.Instance.SystemGenAndDisplay.ShowAllPanels(m_oDockPanel);
+        }
+
+
+        #endregion
     }
 }

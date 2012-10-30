@@ -18,7 +18,7 @@ namespace Pulsar4X.UI
             Helpers.UIController.Instance.Initialise();
 
             Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
+            //Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Forms.MainForm());
         }
     }
