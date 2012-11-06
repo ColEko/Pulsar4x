@@ -20,13 +20,16 @@ namespace Pulsar4X.UI.ViewModels
             get { return _currentstarsystem; }
             set
             {
+                
+
+                _currentstarsystem = value;
+
                 // safty check
                 if (_currentstarsystem == null)
                 {
                     return;
                 }
 
-                _currentstarsystem = value;
                 //NotifyPropertyChanged("CurrentStarSystem");
                 OnPropertyChanged(() => CurrentStarSystem);
                 CurrentStarSystemAge = _currentstarsystem.Stars[0].Age.ToString();
@@ -131,14 +134,15 @@ namespace Pulsar4X.UI.ViewModels
 
         public StarSystemViewModel()
         {
+            // Just gen a Starsystem
+            StarSystems = GameState.Instance.StarSystems;
+
             // safty check
-            if (CurrentStarSystem == null)
+            if (StarSystems == null)
             {
                 return;
             }
 
-            // Just gen a Starsystem
-            StarSystems = GameState.Instance.StarSystems;
             CurrentStarSystem = GameState.Instance.StarSystems.FirstOrDefault();
             CurrentStar = CurrentStarSystem.Stars.FirstOrDefault();
             CurrentPlanet = CurrentStar.Planets.FirstOrDefault();

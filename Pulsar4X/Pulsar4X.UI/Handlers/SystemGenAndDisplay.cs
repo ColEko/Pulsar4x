@@ -17,6 +17,11 @@ namespace Pulsar4X.UI.Handlers
         /// </summary>
         Panels.SGaD_DataPanel m_oDataPanel;
 
+        /// <summary>
+        /// Panel Containing all the f9 screen controls:
+        /// </summary>
+        Panels.SGaD_Controls m_oControlsPanel;
+
         public StarSystemViewModel VM { get; set; }
 
         // Some Temp Vars until we work out a better way to do Gen Systems from here.
@@ -27,11 +32,19 @@ namespace Pulsar4X.UI.Handlers
         {
             // Create Panels:
             m_oDataPanel = new Panels.SGaD_DataPanel();
+            m_oControlsPanel = new Panels.SGaD_Controls();
 
             // setup view model:
             VM = new StarSystemViewModel();
 
-            VM.CurrentStarSystem = GameState.Instance.StarSystems.FirstOrDefault();
+            //VM.CurrentStarSystem = GameState.Instance.StarSystems.FirstOrDefault();
+
+            // bind System Selection combo box:
+            m_oControlsPanel.SystemSelectionComboBox.DataSource = VM.StarSystems;
+            m_oControlsPanel.SystemSelectionComboBox.Bind(c => c.SelectedItem, VM, d => d.CurrentStarSystem, DataSourceUpdateMode.OnPropertyChanged);
+            m_oControlsPanel.SystemSelectionComboBox.DisplayMember = "Name";
+
+            m_oControlsPanel.SystemSelectionComboBox.SelectedIndexChanged += (s, args) => m_oControlsPanel.SystemSelectionComboBox.DataBindings["SelectedItem"].WriteValue();
 
             // Setup the stars Grid
             m_oDataPanel.StarDataGrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -86,12 +99,18 @@ namespace Pulsar4X.UI.Handlers
 
         public void ShowAllPanels(DockPanel a_oDockPanel)
         {
-            m_oDataPanel.Show(a_oDockPanel, DockState.Document);
+            ShowDataPanel(a_oDockPanel);
+            ShowControlsPanel(a_oDockPanel);
         }
 
         public void ShowDataPanel(DockPanel a_oDockPanel)
         {
             m_oDataPanel.Show(a_oDockPanel, DockState.Document);
+        }
+
+        public void ShowControlsPanel(DockPanel a_oDockPanel)
+        {
+            m_oControlsPanel.Show(a_oDockPanel, DockState.DockLeft);
         }
 
         #endregion

@@ -20,3 +20,4 @@ C:\Users\SnopyDogy\Documents\GitHub\Pulsar4x\Pulsar4X\Pulsar4X.UI\obj\Release\Ge
 C:\Users\SnopyDogy\Documents\GitHub\Pulsar4x\Pulsar4X\Pulsar4X.UI\obj\Release\GenerateResource.write.1.tlog
 C:\Users\SnopyDogy\Documents\GitHub\Pulsar4x\Pulsar4X\Pulsar4X.UI\obj\Release\Pulsar4X.UI.exe
 C:\Users\SnopyDogy\Documents\GitHub\Pulsar4x\Pulsar4X\Pulsar4X.UI\obj\Release\Pulsar4X.UI.pdb
+C:\Users\SnopyDogy\Documents\GitHub\Pulsar4x\Pulsar4X\Pulsar4X.UI\obj\Release\Pulsar4X.UI.Panels.SGaD_Controls.resources
