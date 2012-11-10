@@ -39,9 +39,16 @@ namespace Pulsar4X.UI.Forms
             // Setup Events:
             exitToolStripMenuItem.Click += new EventHandler(exitToolStripMenuItem_Click);
             systemInformationToolStripMenuItem.Click += new EventHandler(systemInformationToolStripMenuItem_Click);
+            aboutToolStripMenuItem.Click += new EventHandler(aboutToolStripMenuItem_Click);
         }
 
         #region MenuAndToolStripEvents
+
+        void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Dialogs.AboutBox frmAboutBox = new Dialogs.AboutBox();
+            frmAboutBox.ShowDialog();
+        }
 
         void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
