@@ -6,6 +6,8 @@ Pulsar4X/Pulsar4X.Tests/bin
 Pulsar4X/Pulsar4X.Tests/obj
 Pulsar4x/Pulsar4X.UI/bin
 Pulsar4x/Pulsar4X.UI/obj
+Pulsar4x/Pulsar4X.UI/Bin
+Pulsar4x/Pulsar4X.UI/Obj
 *.db
 *.suo
 *.user
