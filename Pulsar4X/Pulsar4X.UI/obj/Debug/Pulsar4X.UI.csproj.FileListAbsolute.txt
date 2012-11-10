@@ -20,3 +20,5 @@ C:\Users\SnopyDogy\Documents\GitHub\Pulsar4x\Pulsar4X\Pulsar4X.UI\obj\Debug\Gene
 C:\Users\SnopyDogy\Documents\GitHub\Pulsar4x\Pulsar4X\Pulsar4X.UI\obj\Debug\GenerateResource.write.1.tlog
 C:\Users\SnopyDogy\Documents\GitHub\Pulsar4x\Pulsar4X\Pulsar4X.UI\obj\Debug\Pulsar4X.UI.exe
 C:\Users\SnopyDogy\Documents\GitHub\Pulsar4x\Pulsar4X\Pulsar4X.UI\obj\Debug\Pulsar4X.UI.pdb
+C:\Users\SnopyDogy\Documents\GitHub\Pulsar4x\Pulsar4X\Pulsar4X.UI\obj\Debug\Pulsar4X.UI.Panels.SGaD_Controls.resources
+C:\Users\SnopyDogy\Documents\GitHub\Pulsar4x\Pulsar4X\Pulsar4X.UI\obj\Debug\Pulsar4X.UI.Dialogs.GenGalaxyDialog.resources

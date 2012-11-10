@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 using Pulsar4X.UI.ViewModels;
 using Pulsar4X.Entities;
 using Pulsar4X.Stargen;
+using Newtonsoft.Json;
 
 namespace Pulsar4X.UI.Handlers
 {
@@ -36,8 +38,6 @@ namespace Pulsar4X.UI.Handlers
 
             // setup view model:
             VM = new StarSystemViewModel();
-
-            //VM.CurrentStarSystem = GameState.Instance.StarSystems.FirstOrDefault();
 
             // bind System Selection combo box:
             m_oControlsPanel.SystemSelectionComboBox.DataSource = VM.StarSystems;
@@ -70,9 +70,69 @@ namespace Pulsar4X.UI.Handlers
 
             m_oDataPanel.PlanetsDataGrid.DataSource = VM.PlanetSource;
             m_oDataPanel.PlanetsDataGrid.SelectionChanged += new EventHandler(PlanetsDataGrid_SelectionChanged);
+
+            // Setup Event handlers for Controls panel buttons:
+            m_oControlsPanel.GenSystemButton.Click += new EventHandler(GenSystemButton_Click);
+            m_oControlsPanel.GenGalaxyButton.Click += new EventHandler(GenGalaxyButton_Click);
+            m_oControlsPanel.DeleteSystemButton.Click += new EventHandler(DeleteSystemButton_Click);
+            m_oControlsPanel.AutoRenameButton.Click += new EventHandler(AutoRenameButton_Click);
+            m_oControlsPanel.AddColonyButton.Click += new EventHandler(AddColonyButton_Click);
+            m_oControlsPanel.ExportButton.Click += new EventHandler(ExportButton_Click);
+
+            // for now just enable ther SM stuff.
+            m_oControlsPanel.OnSMEnable();
         }
 
         #region EventHandlers
+
+        void ExportButton_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog oSaveFileDialog = new SaveFileDialog();
+            oSaveFileDialog.DefaultExt = "json";
+            oSaveFileDialog.Filter = "JSON Files (*.json)|*.json";
+            oSaveFileDialog.Title = "Export Systems";
+
+            oSaveFileDialog.ShowDialog();
+
+            var serializer = new JsonSerializer();
+            serializer.Formatting = Formatting.Indented;
+            serializer.NullValueHandling = NullValueHandling.Include;
+            serializer.PreserveReferencesHandling = PreserveReferencesHandling.All;
+
+            using (StreamWriter sw = new StreamWriter(oSaveFileDialog.FileName))
+            using (JsonWriter writer = new JsonTextWriter(sw))
+            {
+                serializer.Serialize(writer, VM.StarSystems);
+            }
+        }
+
+        void AddColonyButton_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        void AutoRenameButton_Click(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        void DeleteSystemButton_Click(object sender, EventArgs e)
+        {
+            ///< @todo Need better cleanup /refresh...
+            GameState.Instance.StarSystems.Remove(VM.CurrentStarSystem);
+        }
+
+        void GenGalaxyButton_Click(object sender, EventArgs e)
+        {
+            Dialogs.GenGalaxyDialog diagGenGalaxy = new Dialogs.GenGalaxyDialog();
+            diagGenGalaxy.ShowDialog();
+        }
+
+        void GenSystemButton_Click(object sender, EventArgs e)
+        {
+            m_iNumberOfNewSystemsGened++;
+            GameState.Instance.StarSystems.Add(ssf.Create("Gened System " + m_iNumberOfNewSystemsGened.ToString()));
+        }
 
         void StarsDataGrid_SelectionChanged(object sender, EventArgs e)
         {
@@ -92,7 +152,7 @@ namespace Pulsar4X.UI.Handlers
                 VM.CurrentPlanet = (Planet)sel[0].DataBoundItem;
             }
         }
-
+        
         #endregion
 
         #region PublicMethods
@@ -331,7 +391,6 @@ namespace Pulsar4X.UI.Handlers
                 m_oDataPanel.PlanetsDataGrid.Columns.Add(col);
             }
         }
-
 
         #endregion
 

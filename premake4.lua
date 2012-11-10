@@ -7,46 +7,46 @@ solution "Pulsar4X"
 	framework "4.0"
 	
 	-- WinForms Project, old UI project
-	project "Pulsar4X.WinForms"
-		kind "WindowedApp"
-		language "C#"
-		location "Pulsar4X/Pulsar4X.WinForms"
-		objdir "Pulsar4X/Pulsar4X.WinForms/obj"
-		links { -- Add any needed references here
-			"Pulsar4X.Lib",
-			"System",
-			"System.Data",
-			"System.Windows.Forms",
-			"System.Drawing",
-			"System.Xml",
-			log4netlib(),
-			jsonlib(),
-			opentklib(),
-			opentkglcontrollib()
-			}
-		files { 
-			"Pulsar4X/Pulsar4X.WinForms/**.cs",
-			"Pulsar4X/Pulsar4X.WinForms/**.resx",
-			"Pulsar4X/Pulsar4X.WinForms/**.config",
-			"Pulsar4X/Pulsar4X.WinForms/Resources/**"
-			}
-		excludes {
-			"Pulsar4X/Pulsar4X.WinForms/bin/**",
-			"Pulsar4X/Pulsar4X.WinForms/obj/**"
-			}
-		
-		configuration "Resources/**"
-			buildaction "copy"
-		
-		configuration "Debug"
-			targetdir "Pulsar4X/Pulsar4X.WinForms/bin/Debug"
-			defines { "DEBUG", "OPENGL", "SPLASHSCREEN" }
-			flags { "Symbols" }
-			
-		configuration "Release"
-			targetdir "Pulsar4X/Pulsar4X.WinForms/bin/Release"
-			defines { "OPENGL", "SPLASHSCREEN" }
-			flags { "Optimize" }
+	--project "Pulsar4X.WinForms"
+	--	kind "WindowedApp"
+	--	language "C#"
+	--	location "Pulsar4X/Pulsar4X.WinForms"
+	--	objdir "Pulsar4X/Pulsar4X.WinForms/obj"
+	--	links { -- Add any needed references here
+	--		"Pulsar4X.Lib",
+	--		"System",
+	--		"System.Data",
+	--		"System.Windows.Forms",
+	--		"System.Drawing",
+	--		"System.Xml",
+	--		log4netlib(),
+	--		jsonlib(),
+	--		opentklib(),
+	--		opentkglcontrollib()
+	--		}
+	--	files { 
+	--		"Pulsar4X/Pulsar4X.WinForms/**.cs",
+	--		"Pulsar4X/Pulsar4X.WinForms/**.resx",
+	--		"Pulsar4X/Pulsar4X.WinForms/**.config",
+	--		"Pulsar4X/Pulsar4X.WinForms/Resources/**"
+	--		}
+	--	excludes {
+	--		"Pulsar4X/Pulsar4X.WinForms/bin/**",
+	--		"Pulsar4X/Pulsar4X.WinForms/obj/**"
+	--		}
+	--	
+	--	configuration "Resources/**"
+	--		buildaction "copy"
+	--	
+	--	configuration "Debug"
+	--		targetdir "Pulsar4X/Pulsar4X.WinForms/bin/Debug"
+	--		defines { "DEBUG", "OPENGL", "SPLASHSCREEN" }
+	--		flags { "Symbols" }
+	--		
+	--	configuration "Release"
+	--		targetdir "Pulsar4X/Pulsar4X.WinForms/bin/Release"
+	--		defines { "OPENGL", "SPLASHSCREEN" }
+	--		flags { "Optimize" }
 	
 	-- WinForms Project, main UI project
 	project "Pulsar4X.UI"
