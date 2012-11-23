@@ -71,7 +71,6 @@ namespace Pulsar4X.UI.Forms
             Helpers.UIController.Instance.SystemGenAndDisplay.ShowAllPanels(m_oDockPanel);
         }
 
-
         #endregion
     }
 }
