@@ -20,8 +20,6 @@ namespace Pulsar4X.UI.ViewModels
             get { return _currentstarsystem; }
             set
             {
-                
-
                 _currentstarsystem = value;
 
                 // safty check
