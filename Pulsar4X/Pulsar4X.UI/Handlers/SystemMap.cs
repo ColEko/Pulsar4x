@@ -38,6 +38,14 @@ namespace Pulsar4X.UI.Handlers
             m_oControlsPanel = new Panels.SysMap_Controls();
 
             VM = new GLStarSystemViewModel();
+
+            // Bind System Selection Combo Box.
+            m_oControlsPanel.SystemSelectionComboBox.Bind(c => c.DataSource, VM, d => d.StarSystems);
+            m_oControlsPanel.SystemSelectionComboBox.Bind(c => c.SelectedItem, VM, d => d.CurrentStarSystem, DataSourceUpdateMode.OnPropertyChanged);
+            m_oControlsPanel.SystemSelectionComboBox.DisplayMember = "Name";
+            VM.StarSystemChanged += (s, args) => m_oCurrnetSystem = VM.CurrentStarSystem;
+            m_oCurrnetSystem = VM.CurrentStarSystem;
+            m_oControlsPanel.SystemSelectionComboBox.SelectedIndexChanged += (s, args) => m_oControlsPanel.SystemSelectionComboBox.DataBindings["SelectedItem"].WriteValue();
         }
 
         #region PublicMethods
