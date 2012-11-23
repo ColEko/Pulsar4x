@@ -37,6 +37,14 @@ namespace Pulsar4X.UI.Panels
         public SGaD_DataPanel()
         {
             InitializeComponent();
+
+            // Setup Splitter so star data grid canot be made too small.
+            splitContainer1.Panel1MinSize = 108;
+        }
+
+        public void SetSplitterDistance(int a_iDist)
+        {
+            splitContainer1.SplitterDistance = a_iDist;
         }
     }
 }
