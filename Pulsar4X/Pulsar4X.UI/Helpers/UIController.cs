@@ -41,14 +41,24 @@ namespace Pulsar4X.UI.Helpers
                 return m_oSystemGenAndDisplay;
             }
         }
-        
 
+        Handlers.SystemMap m_oSystemMap;
+
+        /// <summary>
+        /// Handler for all the System Map Panels.
+        /// </summary>
+        public Handlers.SystemMap SystemMap
+        {
+            get
+            {
+                return m_oSystemMap;
+            }
+        }
 
         /// <summary>
         /// Constructor that prevents a default instance of this class from being created.
         /// </summary>
         private UIController() { }
-
 
         /// <summary>
         /// Initialises this singelton.
@@ -68,6 +78,7 @@ namespace Pulsar4X.UI.Helpers
 
             // now init ui handlers
             m_oSystemGenAndDisplay = new Handlers.SystemGenAndDisplay();
+            m_oSystemMap = new Handlers.SystemMap();
         }
     }
 }

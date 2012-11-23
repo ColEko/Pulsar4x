@@ -17,6 +17,9 @@ namespace Pulsar4X.UI.Panels
         {
             InitializeComponent();
             this.HideOnClose = true;
+            this.Text = "System Map";
+            this.TabText = "System Map View";
+            this.ToolTipText = "System Map View Port";
         }
     }
 }

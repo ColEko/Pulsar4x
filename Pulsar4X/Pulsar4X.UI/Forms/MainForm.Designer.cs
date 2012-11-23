@@ -29,15 +29,16 @@
         private void InitializeComponent()
         {
             this.m_oMainMenuStrip = new System.Windows.Forms.MenuStrip();
-            this.m_oToolStripContainer = new System.Windows.Forms.ToolStripContainer();
-            this.m_oMainToolStrip = new System.Windows.Forms.ToolStrip();
             this.gameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.spaceMasterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.empireToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.systemInformationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.systemInformationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.m_oToolStripContainer = new System.Windows.Forms.ToolStripContainer();
+            this.m_oMainToolStrip = new System.Windows.Forms.ToolStrip();
+            this.systemMapToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.m_oMainMenuStrip.SuspendLayout();
             this.m_oToolStripContainer.TopToolStripPanel.SuspendLayout();
             this.m_oToolStripContainer.SuspendLayout();
@@ -55,6 +56,60 @@
             this.m_oMainMenuStrip.Size = new System.Drawing.Size(1008, 24);
             this.m_oMainMenuStrip.TabIndex = 0;
             this.m_oMainMenuStrip.Text = "menuStrip1";
+            // 
+            // gameToolStripMenuItem
+            // 
+            this.gameToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exitToolStripMenuItem});
+            this.gameToolStripMenuItem.Name = "gameToolStripMenuItem";
+            this.gameToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.G)));
+            this.gameToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
+            this.gameToolStripMenuItem.Text = "&Game";
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.X)));
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.exitToolStripMenuItem.Text = "E&xit";
+            // 
+            // spaceMasterToolStripMenuItem
+            // 
+            this.spaceMasterToolStripMenuItem.Name = "spaceMasterToolStripMenuItem";
+            this.spaceMasterToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.S)));
+            this.spaceMasterToolStripMenuItem.Size = new System.Drawing.Size(89, 20);
+            this.spaceMasterToolStripMenuItem.Text = "&Space Master";
+            // 
+            // empireToolStripMenuItem
+            // 
+            this.empireToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.systemMapToolStripMenuItem,
+            this.systemInformationToolStripMenuItem});
+            this.empireToolStripMenuItem.Name = "empireToolStripMenuItem";
+            this.empireToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.E)));
+            this.empireToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
+            this.empireToolStripMenuItem.Text = "&Empire";
+            // 
+            // systemInformationToolStripMenuItem
+            // 
+            this.systemInformationToolStripMenuItem.Name = "systemInformationToolStripMenuItem";
+            this.systemInformationToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F9;
+            this.systemInformationToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.systemInformationToolStripMenuItem.Text = "System Information";
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.aboutToolStripMenuItem.Text = "About";
             // 
             // m_oToolStripContainer
             // 
@@ -81,58 +136,12 @@
             this.m_oMainToolStrip.Size = new System.Drawing.Size(111, 25);
             this.m_oMainToolStrip.TabIndex = 0;
             // 
-            // gameToolStripMenuItem
+            // systemMapToolStripMenuItem
             // 
-            this.gameToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exitToolStripMenuItem});
-            this.gameToolStripMenuItem.Name = "gameToolStripMenuItem";
-            this.gameToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.G)));
-            this.gameToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
-            this.gameToolStripMenuItem.Text = "&Game";
-            // 
-            // spaceMasterToolStripMenuItem
-            // 
-            this.spaceMasterToolStripMenuItem.Name = "spaceMasterToolStripMenuItem";
-            this.spaceMasterToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.S)));
-            this.spaceMasterToolStripMenuItem.Size = new System.Drawing.Size(89, 20);
-            this.spaceMasterToolStripMenuItem.Text = "&Space Master";
-            // 
-            // empireToolStripMenuItem
-            // 
-            this.empireToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.systemInformationToolStripMenuItem});
-            this.empireToolStripMenuItem.Name = "empireToolStripMenuItem";
-            this.empireToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.E)));
-            this.empireToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
-            this.empireToolStripMenuItem.Text = "&Empire";
-            // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutToolStripMenuItem});
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "Help";
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.aboutToolStripMenuItem.Text = "About";
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.X)));
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.exitToolStripMenuItem.Text = "E&xit";
-            // 
-            // systemInformationToolStripMenuItem
-            // 
-            this.systemInformationToolStripMenuItem.Name = "systemInformationToolStripMenuItem";
-            this.systemInformationToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F9;
-            this.systemInformationToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
-            this.systemInformationToolStripMenuItem.Text = "System Information";
+            this.systemMapToolStripMenuItem.Name = "systemMapToolStripMenuItem";
+            this.systemMapToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F3;
+            this.systemMapToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.systemMapToolStripMenuItem.Text = "System Map";
             // 
             // MainForm
             // 
@@ -169,5 +178,6 @@
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem systemInformationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem systemMapToolStripMenuItem;
     }
 }

@@ -40,6 +40,7 @@ namespace Pulsar4X.UI.Forms
             exitToolStripMenuItem.Click += new EventHandler(exitToolStripMenuItem_Click);
             systemInformationToolStripMenuItem.Click += new EventHandler(systemInformationToolStripMenuItem_Click);
             aboutToolStripMenuItem.Click += new EventHandler(aboutToolStripMenuItem_Click);
+            systemMapToolStripMenuItem.Click += new EventHandler(systemMapToolStripMenuItem_Click);
 
             // Set up the proportion of the windows used by docing panels at diufferent locations:
             m_oDockPanel.DockBottomPortion = 0.2f;
@@ -48,6 +49,11 @@ namespace Pulsar4X.UI.Forms
         }
 
         #region MenuAndToolStripEvents
+
+        void systemMapToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Helpers.UIController.Instance.SystemMap.ShowAllPanels(m_oDockPanel);
+        }
 
         void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {

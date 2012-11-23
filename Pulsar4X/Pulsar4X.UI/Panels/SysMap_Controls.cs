@@ -94,6 +94,9 @@ namespace Pulsar4X.UI.Panels
 
             this.AutoHidePortion = 0.2f;
             this.HideOnClose = true;
+            this.Text = "System Map";
+            this.TabText = "System Map";
+            this.ToolTipText = "System Map Controls";
         }
     }
 }

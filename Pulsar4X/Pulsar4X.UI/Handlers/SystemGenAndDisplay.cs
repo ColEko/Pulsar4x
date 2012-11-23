@@ -166,6 +166,7 @@ namespace Pulsar4X.UI.Handlers
         public void ShowDataPanel(DockPanel a_oDockPanel)
         {
             m_oDataPanel.Show(a_oDockPanel, DockState.Document);
+            m_oDataPanel.SetSplitterDistance(110);
         }
 
         public void ShowControlsPanel(DockPanel a_oDockPanel)
