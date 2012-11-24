@@ -9,6 +9,7 @@ using Pulsar4X.Entities;
 using Pulsar4X.Stargen;
 using log4net.Config;
 using log4net;
+using Pulsar4X.UI.GLUtilities;
 
 namespace Pulsar4X.UI.Handlers
 {
@@ -24,6 +25,11 @@ namespace Pulsar4X.UI.Handlers
         /// </summary>
         Panels.SysMap_Controls m_oControlsPanel;
 
+        /// <summary>
+        /// The GL Canvas, created here and inserted into the viewport panel.
+        /// </summary>
+        GLCanvas m_oGLCanvas;
+
         // System Map Logger:
         public static readonly ILog logger = LogManager.GetLogger(typeof(SystemMap));
 
@@ -37,6 +43,12 @@ namespace Pulsar4X.UI.Handlers
             m_oViewPortPanel = new Panels.SysMap_ViewPort();
             m_oControlsPanel = new Panels.SysMap_Controls();
 
+            // setup GL Canvas and insert it into the ViewPort:
+            m_oGLCanvas = new GLCanvas();
+            m_oGLCanvas.Dock = DockStyle.Fill;
+            m_oViewPortPanel.Controls.Add(m_oGLCanvas);
+
+            // setup viewmodel:
             VM = new GLStarSystemViewModel();
 
             // Bind System Selection Combo Box.
