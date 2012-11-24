@@ -341,7 +341,6 @@ namespace Pulsar4X.UI.GLUtilities
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.Name = "GLCanvas";
             this.ResumeLayout(false);
-            this.Paint += new PaintEventHandler(OnPaint);
         }
 
         public void OnLoad(object sender, EventArgs e)
@@ -390,6 +389,8 @@ namespace Pulsar4X.UI.GLUtilities
                 // to reflect the new viewing area:
                 SetupViewPort(0, 0, this.Size.Width, this.Size.Height);  // Setup viewport again.
             }
+
+            this.Invalidate();
         }
 
         /// <summary>   Paints this window, Calles the Render() functio to make sure our sceen is rendered. </summary>
@@ -422,7 +423,7 @@ namespace Pulsar4X.UI.GLUtilities
         /// <summary>   Executes the mouse move action. i.e. Panning </summary>
         /// <param name="sender">   Source of the event. </param>
         /// <param name="e">        Event information to send to registered event handlers. </param>
-        private void OnMouseMove(object sender, MouseEventArgs e)
+        public void OnMouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
             {
@@ -439,6 +440,8 @@ namespace Pulsar4X.UI.GLUtilities
                 m_v3PanStartLocation.X = e.Location.X;
                 m_v3PanStartLocation.Y = e.Location.Y;
                 m_v3PanStartLocation.Z = 0.0f;
+
+                this.Invalidate();
             }
         }
 
@@ -446,7 +449,7 @@ namespace Pulsar4X.UI.GLUtilities
         /// <summary>   Executes the mouse down action. i.e. Start panning </summary>
         /// <param name="sender">   Source of the event. </param>
         /// <param name="e">        Event information to send to registered event handlers. </param>
-        private void OnMouseDown(object sender, MouseEventArgs e)
+        public void OnMouseDown(object sender, MouseEventArgs e)
         {
             // An left mouse down, start pan.
             if (e.Button.Equals(System.Windows.Forms.MouseButtons.Right))
@@ -461,15 +464,19 @@ namespace Pulsar4X.UI.GLUtilities
                 // on middle or mouse wheel button, centre!
                 this.CenterOnZero();
             }
+
+            this.Invalidate();
         }
 
-        private void OnMouseUp(object sender, MouseEventArgs e)
+        public void OnMouseUp(object sender, MouseEventArgs e)
         {
             // reset cursor:
             Cursor.Current = Cursors.Default;
+
+            this.Invalidate();
         }
 
-        private void GLCanvas_OnMouseHover(object sender, EventArgs e)
+        public void OnMouseHover(object sender, EventArgs e)
         {
             // get mouse position in control coords:
             Point oCursorPosition = PointToClient(Cursor.Position);
@@ -481,9 +488,10 @@ namespace Pulsar4X.UI.GLUtilities
            // Guid oEntity = m_oCurrentSceen.GetElementAtCoords(v3CurPosWorldCorrds);
         }
 
-        private void OnKeyDown(object sender, KeyEventArgs e)
+        public void OnKeyDown(object sender, KeyEventArgs e)
         {
             InputHandler(e, null);
+            this.Invalidate();
         }
 
         /// <summary>

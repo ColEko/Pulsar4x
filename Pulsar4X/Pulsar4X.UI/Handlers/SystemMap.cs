@@ -88,9 +88,27 @@ namespace Pulsar4X.UI.Handlers
             m_oCurrnetSystem = VM.CurrentStarSystem;
             m_oControlsPanel.SystemSelectionComboBox.SelectedIndexChanged += (s, args) => m_oControlsPanel.SystemSelectionComboBox.DataBindings["SelectedItem"].WriteValue();
 
-            // refresh the current star system:
-            RefreshStarSystem();
-            UpdateScaleLabels();
+            // register event handlers:
+            m_oGLCanvas.InputHandler += InputProcessor;
+            m_oGLCanvas.Paint += new PaintEventHandler(m_oGLCanvas.OnPaint);
+            m_oGLCanvas.KeyDown += new KeyEventHandler(m_oGLCanvas.OnKeyDown);
+            m_oGLCanvas.MouseDown += new MouseEventHandler(m_oGLCanvas.OnMouseDown);
+            m_oGLCanvas.MouseMove += new MouseEventHandler(m_oGLCanvas.OnMouseMove);
+            m_oGLCanvas.MouseUp += new MouseEventHandler(m_oGLCanvas.OnMouseUp);
+            m_oGLCanvas.MouseHover += new EventHandler(m_oGLCanvas.OnMouseHover);
+            m_oGLCanvas.SizeChanged += new EventHandler(m_oGLCanvas.OnSizeChange);
+            m_oGLCanvas.MouseWheel += new MouseEventHandler(OnMouseWheel);
+            Application.Idle += new EventHandler(m_oGLCanvas.Application_Idle);
+
+            m_oControlsPanel.PanUpButton.Click += new EventHandler(PanUpButton_Click);
+            m_oControlsPanel.PanDownButton.Click += new EventHandler(PanDownButton_Click);
+            m_oControlsPanel.PanLeftButton.Click += new EventHandler(PanLeftButton_Click);
+            m_oControlsPanel.PanRightButton.Click += new EventHandler(PanRightButton_Click);
+            m_oControlsPanel.ZoomInButton.Click += new EventHandler(ZoomInButton_Click);
+            m_oControlsPanel.ZoomOutButton.Click += new EventHandler(ZoomOutButton_Click);
+            m_oControlsPanel.ResetViewButton.Click += new EventHandler(ResetViewButton_Click);
+            m_oViewPortPanel.SizeChanged += new EventHandler(ViewPort_SizeChanged);
+
         }
 
 
@@ -112,7 +130,7 @@ namespace Pulsar4X.UI.Handlers
             }
         }
 
-        private void SystemMap_MouseWheel(object sender, System.Windows.Forms.MouseEventArgs e)
+        private void OnMouseWheel(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             // See here for MSDN Ref: http://msdn.microsoft.com/en-us/library/system.windows.forms.control.mousewheel(v=vs.71).aspx
             if (e.Delta <= -120)
@@ -129,6 +147,62 @@ namespace Pulsar4X.UI.Handlers
             }
         }
 
+        private void ResetViewButton_Click(object sender, EventArgs e)
+        {
+            m_oGLCanvas.CenterOnZero();
+            m_oGLCanvas.ZoomFactor = m_oCurrentSceen.DefaultZoomScaler;
+            m_oCurrentSceen.Refresh();
+            m_oGLCanvas.Focus();
+            UpdateScaleLabels();
+        }
+
+        private void ZoomInButton_Click(object sender, EventArgs e)
+        {
+            m_oGLCanvas.IncreaseZoomScaler();
+            UpdateScaleLabels();
+            m_oGLCanvas.Focus();
+        }
+
+        private void ZoomOutButton_Click(object sender, EventArgs e)
+        {
+            m_oGLCanvas.DecreaseZoomScaler();
+            UpdateScaleLabels();
+            m_oGLCanvas.Focus();
+        }
+
+        private void PanRightButton_Click(object sender, EventArgs e)
+        {
+            Vector3 v3PanAmount = new Vector3(-UIConstants.DEFAULT_PAN_AMOUNT, 0, 0);
+            m_oGLCanvas.Pan(ref v3PanAmount);
+            m_oGLCanvas.Focus();
+        }
+
+        private void PanLeftButton_Click(object sender, EventArgs e)
+        {
+            Vector3 v3PanAmount = new Vector3(UIConstants.DEFAULT_PAN_AMOUNT, 0, 0);
+            m_oGLCanvas.Pan(ref v3PanAmount);
+            m_oGLCanvas.Focus();
+        }
+
+        private void PanUpButton_Click(object sender, EventArgs e)
+        {
+            Vector3 v3PanAmount = new Vector3(0, -UIConstants.DEFAULT_PAN_AMOUNT, 0);
+            m_oGLCanvas.Pan(ref v3PanAmount);
+            m_oGLCanvas.Focus();
+        }
+
+        private void PanDownButton_Click(object sender, EventArgs e)
+        {
+            Vector3 v3PanAmount = new Vector3(0, UIConstants.DEFAULT_PAN_AMOUNT, 0);
+            m_oGLCanvas.Pan(ref v3PanAmount);
+            m_oGLCanvas.Focus();
+        }
+
+        private void ViewPort_SizeChanged(object sender, EventArgs e)
+        {
+            UpdateScaleLabels();
+        }
+
         #endregion
 
         #region PublicMethods
@@ -137,6 +211,10 @@ namespace Pulsar4X.UI.Handlers
         {
             ShowViewPortPanel(a_oDockPanel);
             ShowControlsPanel(a_oDockPanel);
+
+            // refresh the current star system:
+            RefreshStarSystem();
+            UpdateScaleLabels();
         }
 
         public void ShowViewPortPanel(DockPanel a_oDockPanel)
@@ -328,66 +406,6 @@ namespace Pulsar4X.UI.Handlers
         {
             m_oCurrentSceen = a_oSceen;
             m_oGLCanvas.SceenToRender = a_oSceen;
-        }
-
-        private void ResetViewButton_Click(object sender, EventArgs e)
-        {
-            m_oGLCanvas.CenterOnZero();
-            m_oGLCanvas.ZoomFactor = m_oCurrentSceen.DefaultZoomScaler;
-            m_oCurrentSceen.Refresh();
-            m_oGLCanvas.Focus();
-        }
-
-        private void ZoomInButton_Click(object sender, EventArgs e)
-        {
-            m_oGLCanvas.IncreaseZoomScaler();
-            UpdateScaleLabels();
-            m_oGLCanvas.Focus();
-        }
-
-        private void ZoomOutButton_Click(object sender, EventArgs e)
-        {
-            m_oGLCanvas.DecreaseZoomScaler();
-            UpdateScaleLabels();
-            m_oGLCanvas.Focus();
-        }
-
-        private void PanRightButton_Click(object sender, EventArgs e)
-        {
-            Vector3 v3PanAmount = new Vector3(-UIConstants.DEFAULT_PAN_AMOUNT, 0, 0);
-            m_oGLCanvas.Pan(ref v3PanAmount);
-            m_oGLCanvas.Focus();
-        }
-
-        private void PanLeftButton_Click(object sender, EventArgs e)
-        {
-            Vector3 v3PanAmount = new Vector3(UIConstants.DEFAULT_PAN_AMOUNT, 0, 0);
-            m_oGLCanvas.Pan(ref v3PanAmount);
-            m_oGLCanvas.Focus();
-        }
-
-        private void PanUpButton_Click(object sender, EventArgs e)
-        {
-            Vector3 v3PanAmount = new Vector3(0, -UIConstants.DEFAULT_PAN_AMOUNT, 0);
-            m_oGLCanvas.Pan(ref v3PanAmount);
-            m_oGLCanvas.Focus();
-        }
-
-        private void PanDownButton_Click(object sender, EventArgs e)
-        {
-            Vector3 v3PanAmount = new Vector3(0, UIConstants.DEFAULT_PAN_AMOUNT, 0);
-            m_oGLCanvas.Pan(ref v3PanAmount);
-            m_oGLCanvas.Focus();
-        }
-
-        private void SystemMap_SizeChanged(object sender, EventArgs e)
-        {
-            // update Scale lables for new screen size:
-            //if (m_oGLCanvas != null)
-            //{
-            //    m_oGLCanvas.Size = this.Size;
-            //}
-            UpdateScaleLabels();
         }
 
         #endregion
