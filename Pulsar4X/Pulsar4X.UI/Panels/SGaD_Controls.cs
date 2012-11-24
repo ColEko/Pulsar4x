@@ -125,11 +125,16 @@ namespace Pulsar4X.UI.Panels
             }
         }
 
+        private ToolTip m_oToolTip;
+
         #endregion
 
         public SGaD_Controls()
         {
             InitializeComponent();
+
+            m_oToolTip = new ToolTip();
+            m_oToolTip.ShowAlways = true;
 
             // Define some default values for the textboxes.
             m_oAgeTextBox.Enabled = false;
@@ -141,6 +146,18 @@ namespace Pulsar4X.UI.Panels
 
             // Set SM controls disabled by default:
             OnSMDisable();
+
+            // Setup tool tips:
+            m_oToolTip.SetToolTip(m_oAgeTextBox, "System Age in Years");
+            m_oToolTip.SetToolTip(m_oAddColonyButton, "Adds a colony to the selected system body");
+            m_oToolTip.SetToolTip(m_oAutoRenameButton, "Automatically re-names all bodies the system based on race templates");
+            m_oToolTip.SetToolTip(m_oDeleteSystemButton, "Deletes the current system");
+            m_oToolTip.SetToolTip(m_oDisscoveredDateTextBox, "The date you first explored this system");
+            m_oToolTip.SetToolTip(m_oExportButton, "Exports the current galaxy to a Json file");
+            m_oToolTip.SetToolTip(m_oGenGalaxyButton, "Allows the generation of multipul systems as a batch job");
+            m_oToolTip.SetToolTip(m_oGenSystemButton, "Generates a single system");
+            m_oToolTip.SetToolTip(m_oSystemSelectionComboBox, "Select the system you wish to view");
+            m_oToolTip.SetToolTip(m_oSystemTypeTextBox, "The type of system, e.g Binary Star System");
         }
 
         #region PublicMethods

@@ -108,17 +108,33 @@ namespace Pulsar4X.UI.Panels
             }
         }
 
+        private ToolTip m_oToolTip;
+
         #endregion
 
         public SysMap_Controls()
         {
             InitializeComponent();
 
+            m_oToolTip = new ToolTip();
+
             this.AutoHidePortion = 0.2f;
             this.HideOnClose = true;
             this.Text = "System Map";
             this.TabText = "System Map";
             this.ToolTipText = "System Map Controls";
+
+            //setup tool tips:
+            m_oToolTip.SetToolTip(m_oPanDownButton, "Pans Down (S)");
+            m_oToolTip.SetToolTip(m_oPanLeftButton, "Pans Left (A)");
+            m_oToolTip.SetToolTip(m_oPanRightButton, "Pans Right (D)");
+            m_oToolTip.SetToolTip(m_oPanUpButton, "Pans Up (W)");
+            m_oToolTip.SetToolTip(m_oResetViewButton, "Resets the System view (R)");
+            m_oToolTip.SetToolTip(m_oScaleAULabel, "The width of the View Port in AU");
+            m_oToolTip.SetToolTip(m_oScaleKMLabel, "The width of the View Port in Km");
+            m_oToolTip.SetToolTip(m_oSystemSelectionComboBox, "Select the system you wish to view");
+            m_oToolTip.SetToolTip(m_oZoomInButton, "Zooms in (E)");
+            m_oToolTip.SetToolTip(m_oZoomOutButton, "Zooms out (Q)");
         }
     }
 }
