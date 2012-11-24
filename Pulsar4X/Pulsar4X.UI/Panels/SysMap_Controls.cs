@@ -86,6 +86,28 @@ namespace Pulsar4X.UI.Panels
             }
         }
 
+        /// <summary>
+        /// Scale in KM lable
+        /// </summary>
+        public Label ScaleKMLable
+        {
+            get
+            {
+                return m_oScaleKMLabel;
+            }
+        }
+
+        /// <summary>
+        /// Scale in AU lable
+        /// </summary>
+        public Label ScaleAULable
+        {
+            get
+            {
+                return m_oScaleAULabel;
+            }
+        }
+
         #endregion
 
         public SysMap_Controls()

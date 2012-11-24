@@ -30,15 +30,18 @@
         {
             this.m_oSystemSelectionComboBox = new System.Windows.Forms.ComboBox();
             this.m_oViewControlsGroupBox = new System.Windows.Forms.GroupBox();
-            this.m_oScaleGroupBox = new System.Windows.Forms.GroupBox();
-            this.m_oPanUpButton = new System.Windows.Forms.Button();
-            this.m_oPanDownButton = new System.Windows.Forms.Button();
-            this.m_oPanLeftButton = new System.Windows.Forms.Button();
-            this.m_oPanRightButton = new System.Windows.Forms.Button();
-            this.m_oResetViewButton = new System.Windows.Forms.Button();
-            this.m_oZoomInButton = new System.Windows.Forms.Button();
             this.m_oZoomOutButton = new System.Windows.Forms.Button();
+            this.m_oZoomInButton = new System.Windows.Forms.Button();
+            this.m_oResetViewButton = new System.Windows.Forms.Button();
+            this.m_oPanRightButton = new System.Windows.Forms.Button();
+            this.m_oPanLeftButton = new System.Windows.Forms.Button();
+            this.m_oPanDownButton = new System.Windows.Forms.Button();
+            this.m_oPanUpButton = new System.Windows.Forms.Button();
+            this.m_oScaleGroupBox = new System.Windows.Forms.GroupBox();
+            this.m_oScaleKMLabel = new System.Windows.Forms.Label();
+            this.m_oScaleAULabel = new System.Windows.Forms.Label();
             this.m_oViewControlsGroupBox.SuspendLayout();
+            this.m_oScaleGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // m_oSystemSelectionComboBox
@@ -65,59 +68,14 @@
             this.m_oViewControlsGroupBox.TabStop = false;
             this.m_oViewControlsGroupBox.Text = "View Controls";
             // 
-            // m_oScaleGroupBox
+            // m_oZoomOutButton
             // 
-            this.m_oScaleGroupBox.Location = new System.Drawing.Point(13, 153);
-            this.m_oScaleGroupBox.Name = "m_oScaleGroupBox";
-            this.m_oScaleGroupBox.Size = new System.Drawing.Size(183, 60);
-            this.m_oScaleGroupBox.TabIndex = 2;
-            this.m_oScaleGroupBox.TabStop = false;
-            this.m_oScaleGroupBox.Text = "Scale";
-            // 
-            // m_oPanUpButton
-            // 
-            this.m_oPanUpButton.Location = new System.Drawing.Point(31, 19);
-            this.m_oPanUpButton.Name = "m_oPanUpButton";
-            this.m_oPanUpButton.Size = new System.Drawing.Size(23, 23);
-            this.m_oPanUpButton.TabIndex = 2;
-            this.m_oPanUpButton.Text = "^";
-            this.m_oPanUpButton.UseVisualStyleBackColor = true;
-            // 
-            // m_oPanDownButton
-            // 
-            this.m_oPanDownButton.Location = new System.Drawing.Point(31, 74);
-            this.m_oPanDownButton.Name = "m_oPanDownButton";
-            this.m_oPanDownButton.Size = new System.Drawing.Size(23, 23);
-            this.m_oPanDownButton.TabIndex = 4;
-            this.m_oPanDownButton.Text = "v";
-            this.m_oPanDownButton.UseVisualStyleBackColor = true;
-            // 
-            // m_oPanLeftButton
-            // 
-            this.m_oPanLeftButton.Location = new System.Drawing.Point(6, 45);
-            this.m_oPanLeftButton.Name = "m_oPanLeftButton";
-            this.m_oPanLeftButton.Size = new System.Drawing.Size(23, 23);
-            this.m_oPanLeftButton.TabIndex = 1;
-            this.m_oPanLeftButton.Text = "<";
-            this.m_oPanLeftButton.UseVisualStyleBackColor = true;
-            // 
-            // m_oPanRightButton
-            // 
-            this.m_oPanRightButton.Location = new System.Drawing.Point(58, 45);
-            this.m_oPanRightButton.Name = "m_oPanRightButton";
-            this.m_oPanRightButton.Size = new System.Drawing.Size(23, 23);
-            this.m_oPanRightButton.TabIndex = 3;
-            this.m_oPanRightButton.Text = ">";
-            this.m_oPanRightButton.UseVisualStyleBackColor = true;
-            // 
-            // m_oResetViewButton
-            // 
-            this.m_oResetViewButton.Location = new System.Drawing.Point(102, 74);
-            this.m_oResetViewButton.Name = "m_oResetViewButton";
-            this.m_oResetViewButton.Size = new System.Drawing.Size(75, 23);
-            this.m_oResetViewButton.TabIndex = 7;
-            this.m_oResetViewButton.Text = "Reset";
-            this.m_oResetViewButton.UseVisualStyleBackColor = true;
+            this.m_oZoomOutButton.Location = new System.Drawing.Point(102, 19);
+            this.m_oZoomOutButton.Name = "m_oZoomOutButton";
+            this.m_oZoomOutButton.Size = new System.Drawing.Size(23, 23);
+            this.m_oZoomOutButton.TabIndex = 5;
+            this.m_oZoomOutButton.Text = "-";
+            this.m_oZoomOutButton.UseVisualStyleBackColor = true;
             // 
             // m_oZoomInButton
             // 
@@ -128,14 +86,79 @@
             this.m_oZoomInButton.Text = "+";
             this.m_oZoomInButton.UseVisualStyleBackColor = true;
             // 
-            // m_oZoomOutButton
+            // m_oResetViewButton
             // 
-            this.m_oZoomOutButton.Location = new System.Drawing.Point(102, 19);
-            this.m_oZoomOutButton.Name = "m_oZoomOutButton";
-            this.m_oZoomOutButton.Size = new System.Drawing.Size(23, 23);
-            this.m_oZoomOutButton.TabIndex = 5;
-            this.m_oZoomOutButton.Text = "-";
-            this.m_oZoomOutButton.UseVisualStyleBackColor = true;
+            this.m_oResetViewButton.Location = new System.Drawing.Point(102, 74);
+            this.m_oResetViewButton.Name = "m_oResetViewButton";
+            this.m_oResetViewButton.Size = new System.Drawing.Size(75, 23);
+            this.m_oResetViewButton.TabIndex = 7;
+            this.m_oResetViewButton.Text = "Reset";
+            this.m_oResetViewButton.UseVisualStyleBackColor = true;
+            // 
+            // m_oPanRightButton
+            // 
+            this.m_oPanRightButton.Location = new System.Drawing.Point(58, 45);
+            this.m_oPanRightButton.Name = "m_oPanRightButton";
+            this.m_oPanRightButton.Size = new System.Drawing.Size(23, 23);
+            this.m_oPanRightButton.TabIndex = 3;
+            this.m_oPanRightButton.Text = ">";
+            this.m_oPanRightButton.UseVisualStyleBackColor = true;
+            // 
+            // m_oPanLeftButton
+            // 
+            this.m_oPanLeftButton.Location = new System.Drawing.Point(6, 45);
+            this.m_oPanLeftButton.Name = "m_oPanLeftButton";
+            this.m_oPanLeftButton.Size = new System.Drawing.Size(23, 23);
+            this.m_oPanLeftButton.TabIndex = 1;
+            this.m_oPanLeftButton.Text = "<";
+            this.m_oPanLeftButton.UseVisualStyleBackColor = true;
+            // 
+            // m_oPanDownButton
+            // 
+            this.m_oPanDownButton.Location = new System.Drawing.Point(31, 74);
+            this.m_oPanDownButton.Name = "m_oPanDownButton";
+            this.m_oPanDownButton.Size = new System.Drawing.Size(23, 23);
+            this.m_oPanDownButton.TabIndex = 4;
+            this.m_oPanDownButton.Text = "v";
+            this.m_oPanDownButton.UseVisualStyleBackColor = true;
+            // 
+            // m_oPanUpButton
+            // 
+            this.m_oPanUpButton.Location = new System.Drawing.Point(31, 19);
+            this.m_oPanUpButton.Name = "m_oPanUpButton";
+            this.m_oPanUpButton.Size = new System.Drawing.Size(23, 23);
+            this.m_oPanUpButton.TabIndex = 2;
+            this.m_oPanUpButton.Text = "^";
+            this.m_oPanUpButton.UseVisualStyleBackColor = true;
+            // 
+            // m_oScaleGroupBox
+            // 
+            this.m_oScaleGroupBox.Controls.Add(this.m_oScaleAULabel);
+            this.m_oScaleGroupBox.Controls.Add(this.m_oScaleKMLabel);
+            this.m_oScaleGroupBox.Location = new System.Drawing.Point(13, 153);
+            this.m_oScaleGroupBox.Name = "m_oScaleGroupBox";
+            this.m_oScaleGroupBox.Size = new System.Drawing.Size(183, 47);
+            this.m_oScaleGroupBox.TabIndex = 2;
+            this.m_oScaleGroupBox.TabStop = false;
+            this.m_oScaleGroupBox.Text = "Scale";
+            // 
+            // m_oScaleKMLabel
+            // 
+            this.m_oScaleKMLabel.AutoSize = true;
+            this.m_oScaleKMLabel.Location = new System.Drawing.Point(7, 16);
+            this.m_oScaleKMLabel.Name = "m_oScaleKMLabel";
+            this.m_oScaleKMLabel.Size = new System.Drawing.Size(22, 13);
+            this.m_oScaleKMLabel.TabIndex = 0;
+            this.m_oScaleKMLabel.Text = "Km";
+            // 
+            // m_oScaleAULabel
+            // 
+            this.m_oScaleAULabel.AutoSize = true;
+            this.m_oScaleAULabel.Location = new System.Drawing.Point(7, 29);
+            this.m_oScaleAULabel.Name = "m_oScaleAULabel";
+            this.m_oScaleAULabel.Size = new System.Drawing.Size(22, 13);
+            this.m_oScaleAULabel.TabIndex = 1;
+            this.m_oScaleAULabel.Text = "AU";
             // 
             // SysMap_Controls
             // 
@@ -148,6 +171,8 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "SysMap_Controls";
             this.m_oViewControlsGroupBox.ResumeLayout(false);
+            this.m_oScaleGroupBox.ResumeLayout(false);
+            this.m_oScaleGroupBox.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -164,5 +189,7 @@
         private System.Windows.Forms.Button m_oPanLeftButton;
         private System.Windows.Forms.Button m_oPanDownButton;
         private System.Windows.Forms.Button m_oPanUpButton;
+        private System.Windows.Forms.Label m_oScaleAULabel;
+        private System.Windows.Forms.Label m_oScaleKMLabel;
     }
 }

@@ -341,6 +341,7 @@ namespace Pulsar4X.UI.GLUtilities
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.Name = "GLCanvas";
             this.ResumeLayout(false);
+            this.Paint += new PaintEventHandler(OnPaint);
         }
 
         public void OnLoad(object sender, EventArgs e)
