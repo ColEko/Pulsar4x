@@ -20,18 +20,18 @@ namespace Pulsar4X.UI.GLUtilities
     class GLQuad : GLPrimitive
     {
         /// <summary>   Constructor. </summary>
-        /// <param name="a_oShaderProgram"> The shader program to use. </param>
+        /// <param name="a_oEffect"> The shader program to use. </param>
         /// <param name="a_v2Pos">          The position of the quad (centre). </param>
         /// <param name="a_v2Size">         Size of the Quad. </param>
         /// <param name="a_oColor">         The color to apply to the quad. </param>
         /// <param name="a_szTexture">      (optional) the texture file. </param>
-        public GLQuad(GLShader a_oShaderProgram, Vector3 a_v3Pos, Vector2 a_v2Size, System.Drawing.Color a_oColor, string a_szTexture = "")
+        public GLQuad(GLEffect a_oEffect, Vector3 a_v3Pos, Vector2 a_v2Size, System.Drawing.Color a_oColor, string a_szTexture = "")
             : base()
         {
             // Setup Member Vars:
             m_v2Size = a_v2Size;
             m_v3Position = a_v3Pos;
-            m_oShaderProgram = a_oShaderProgram;
+            m_oEffect = a_oEffect;
             m_m4ModelMatrix = Matrix4.Identity;
             ///< @todo make quads scale better, so it can scale on X or Y...
             m_m4ModelMatrix = Matrix4.Scale(m_v2Size.X) * Matrix4.CreateTranslation(a_v3Pos);  // x and y should be the same, so scale by X
@@ -55,10 +55,10 @@ namespace Pulsar4X.UI.GLUtilities
 
             //setup our quads vertcies:
             m_aoVerticies = new GLVertex[4];
-            m_aoVerticies[0] = new GLVertex(new Vector3(-0.5f, -0.5f * fYScale, 0.0f), a_oColor, new Vector2(0.0f, 1.0f));
-            m_aoVerticies[1] = new GLVertex(new Vector3(0.5f, -0.5f * fYScale, 0.0f), a_oColor, new Vector2(1.0f, 1.0f));
-            m_aoVerticies[2] = new GLVertex(new Vector3(-0.5f, 0.5f * fYScale, 0.0f), a_oColor, new Vector2(0.0f, 0.0f));
-            m_aoVerticies[3] = new GLVertex(new Vector3(0.5f, 0.5f * fYScale, 0.0f), a_oColor, new Vector2(1.0f, 0.0f));
+            m_aoVerticies[0] = new GLVertex(new Vector4(-0.5f, -0.5f * fYScale, 0.0f, 1.0f), a_oColor, new Vector2(0.0f, 1.0f));
+            m_aoVerticies[1] = new GLVertex(new Vector4(0.5f, -0.5f * fYScale, 0.0f, 1.0f), a_oColor, new Vector2(1.0f, 1.0f));
+            m_aoVerticies[2] = new GLVertex(new Vector4(-0.5f, 0.5f * fYScale, 0.0f, 1.0f), a_oColor, new Vector2(0.0f, 0.0f));
+            m_aoVerticies[3] = new GLVertex(new Vector4(0.5f, 0.5f * fYScale, 0.0f, 1.0f), a_oColor, new Vector2(1.0f, 0.0f));
 
             // Setup Draw order. *this apears to have no effect under GL2.X*
             m_auiIndicies = new ushort[4];
@@ -91,8 +91,8 @@ namespace Pulsar4X.UI.GLUtilities
 
             GL.BindBuffer(BufferTarget.ArrayBuffer, m_uiVertexBufferHandle);    // Switch back to our Buffer Object as the current buffer.
             GL.VertexAttribPointer(0, 3, VertexAttribPointerType.Float, false, GLVertex.SizeInBytes(), 0);  // Tells OpenGL about the first three doubles in the vbo, i.e the position of the vertex.
-            GL.VertexAttribPointer(1, 4, VertexAttribPointerType.HalfFloat, true, GLVertex.SizeInBytes(), Vector3.SizeInBytes); // tells OpenGL about the 4 half floats used to repesent color.
-            GL.VertexAttribPointer(2, 2, VertexAttribPointerType.Float, false, GLVertex.SizeInBytes(), (Vector3.SizeInBytes + Vector4h.SizeInBytes)); // tells OpenGL about the 2 floats in the vertgexc used to repesent UV coords.
+            GL.VertexAttribPointer(1, 4, VertexAttribPointerType.HalfFloat, true, GLVertex.SizeInBytes(), Vector4.SizeInBytes); // tells OpenGL about the 4 half floats used to repesent color.
+            GL.VertexAttribPointer(2, 2, VertexAttribPointerType.Float, false, GLVertex.SizeInBytes(), (Vector4.SizeInBytes + Vector4h.SizeInBytes)); // tells OpenGL about the 2 floats in the vertgexc used to repesent UV coords.
             //#if DEBUG
             //        logger.Info("OpenGL Create Vertes Attribute Pointers: " + GL.GetError().ToString());
             //#endif
@@ -119,17 +119,14 @@ namespace Pulsar4X.UI.GLUtilities
         public override void Render(ref Matrix4 a_m4Projection, ref Matrix4 a_m4View)
         {
             GL.BindVertexArray(m_uiVextexArrayHandle);
-            //if (OpenTKUtilities.Instance.SupportedOpenGLVersion == OpenTKUtilities.GLVersion.OpenGL2X)
-            //{
-                GL.BindBuffer(BufferTarget.ElementArrayBuffer, m_uiIndexBufferHandle);
-                GL.BindBuffer(BufferTarget.ArrayBuffer, m_uiVertexBufferHandle);
-            //}
+            GL.BindBuffer(BufferTarget.ElementArrayBuffer, m_uiIndexBufferHandle);
+            GL.BindBuffer(BufferTarget.ArrayBuffer, m_uiVertexBufferHandle);
 
-            m_oShaderProgram.StartUsing(ref m_m4ModelMatrix);
-            m_oShaderProgram.StartUsing(ref a_m4Projection);
-            m_oShaderProgram.StartUsing(ref a_m4View);
+            m_oEffect.StartUsing(ref m_m4ModelMatrix);
+            m_oEffect.StartUsing(ref a_m4Projection);
+            m_oEffect.StartUsing(ref a_m4View);
 
-            OpenTKUtilities.Use2DTexture(m_uiTextureID);
+            GL.BindTexture(TextureTarget.Texture2D, m_uiTextureID);
 
             GL.DrawElements(BeginMode.TriangleStrip, m_auiIndicies.Length, DrawElementsType.UnsignedShort, IntPtr.Zero);
         }
@@ -137,16 +134,13 @@ namespace Pulsar4X.UI.GLUtilities
         public override void Render(ref Matrix4 a_m4View)
         {
             GL.BindVertexArray(m_uiVextexArrayHandle);
-            //if (OpenTKUtilities.Instance.SupportedOpenGLVersion == OpenTKUtilities.GLVersion.OpenGL2X)
-            //{
-                GL.BindBuffer(BufferTarget.ElementArrayBuffer, m_uiIndexBufferHandle);
-                GL.BindBuffer(BufferTarget.ArrayBuffer, m_uiVertexBufferHandle);
-            //}
+            GL.BindBuffer(BufferTarget.ElementArrayBuffer, m_uiIndexBufferHandle);
+            GL.BindBuffer(BufferTarget.ArrayBuffer, m_uiVertexBufferHandle);
 
-            m_oShaderProgram.StartUsing(ref m_m4ModelMatrix);
-            m_oShaderProgram.StartUsing(ref a_m4View);
+            m_oEffect.StartUsing(ref m_m4ModelMatrix);
+            m_oEffect.StartUsing(ref a_m4View);
 
-            OpenTKUtilities.Use2DTexture(m_uiTextureID);
+            GL.BindTexture(TextureTarget.Texture2D, m_uiTextureID);
 
             GL.DrawElements(BeginMode.TriangleStrip, m_auiIndicies.Length, DrawElementsType.UnsignedShort, IntPtr.Zero);
         }
@@ -154,18 +148,15 @@ namespace Pulsar4X.UI.GLUtilities
         public override void Render()
         {
             GL.BindVertexArray(m_uiVextexArrayHandle);
-            //if (OpenTKUtilities.Instance.SupportedOpenGLVersion == OpenTKUtilities.GLVersion.OpenGL2X)
-           // {
-                GL.BindBuffer(BufferTarget.ElementArrayBuffer, m_uiIndexBufferHandle);
-                GL.BindBuffer(BufferTarget.ArrayBuffer, m_uiVertexBufferHandle);
-            //}
+            GL.BindBuffer(BufferTarget.ElementArrayBuffer, m_uiIndexBufferHandle);
+            GL.BindBuffer(BufferTarget.ArrayBuffer, m_uiVertexBufferHandle);
 
             // recreate our matrix based on size and position.
             this.RecalculateModelMatrix();
 
-            m_oShaderProgram.StartUsing(ref m_m4ModelMatrix);
+            m_oEffect.StartUsing(ref m_m4ModelMatrix);
 
-            OpenTKUtilities.Use2DTexture(m_uiTextureID);
+            GL.BindTexture(TextureTarget.Texture2D, m_uiTextureID);
 
             GL.DrawElements(BeginMode.TriangleStrip, m_auiIndicies.Length, DrawElementsType.UnsignedShort, IntPtr.Zero);
         }

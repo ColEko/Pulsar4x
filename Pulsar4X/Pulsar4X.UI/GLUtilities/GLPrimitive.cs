@@ -118,7 +118,7 @@ namespace Pulsar4X.UI.GLUtilities
         /// <summary> 
         /// A handle to the shader program to be used by this Primitive. 
         /// </summary>
-        protected GLShader m_oShaderProgram;
+        protected GLEffect m_oEffect;
 
         /// <summary>   
         /// Default constructor. 

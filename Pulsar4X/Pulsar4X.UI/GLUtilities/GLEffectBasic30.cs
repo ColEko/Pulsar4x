@@ -14,7 +14,7 @@ namespace Pulsar4X.UI.GLUtilities
     /// <summary>
     /// Most Basic type of GL effect/Shaders, Works with openGL 3.0 or higher.
     /// </summary>
-    class GLEffectBasic30 : GLEffect
+    public class GLEffectBasic30 : GLEffect
     {
         /// <summary>   Constructor. </summary>
         /// <param name="a_szVertShaderFile">   The Vertex shader file. </param>
@@ -49,7 +49,7 @@ namespace Pulsar4X.UI.GLUtilities
             GL.GetShaderInfoLog(iGLVertexShader, out szShaderError);
             if (iShaderError != 1)
             {
-                logger.Error("Error " + iShaderError.ToString() + " Compiling Vertex Shader: " + szShaderError; // Log Result!
+                logger.Error("Error " + iShaderError.ToString() + " Compiling Vertex Shader: " + szShaderError); // Log Result!
                 iShaderError = 1;
             }
 

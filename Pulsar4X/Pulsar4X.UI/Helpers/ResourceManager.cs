@@ -120,8 +120,7 @@ namespace Pulsar4X.UI.Helpers
             // Generate Texture Handle
             GL.GenTextures(1, out oNewTexture.m_uiTextureID);
             // Tell openGL that this is a 2d texture:
-            //GL.BindTexture(TextureTarget.Texture2D, oNewTexture.m_uiTextureID);
-            Pulsar4X.WinForms.OpenTKUtilities.Use2DTexture(oNewTexture.m_uiTextureID);
+            GL.BindTexture(TextureTarget.Texture2D, oNewTexture.m_uiTextureID);
 
             // Configure Text Paramaters:
             //GL.TexEnv(TextureEnvTarget.TextureEnv, TextureEnvParameter.TextureEnvMode, (float)TextureEnvMode.Modulate);
@@ -168,8 +167,8 @@ namespace Pulsar4X.UI.Helpers
             oNewTexture.m_uiUseCount = 1;
 
             // create working Vars:
-            a_v2Size.X = a_szString.Length * Pulsar4X.WinForms.UIConstants.DEFAULT_STRING_TEXTURE_WIDTH_PER_CHAR; // Calcs the texture width based on no of chars.
-            a_v2Size.Y = Pulsar4X.WinForms.UIConstants.DEFAULT_STRING_TEXTURE_HEIGHT_PER_CHAR;
+            a_v2Size.X = a_szString.Length * Pulsar4X.UI.UIConstants.DEFAULT_STRING_TEXTURE_WIDTH_PER_CHAR; // Calcs the texture width based on no of chars.
+            a_v2Size.Y = Pulsar4X.UI.UIConstants.DEFAULT_STRING_TEXTURE_HEIGHT_PER_CHAR;
             Bitmap oStringBitmap = new Bitmap((int)a_v2Size.X, (int)a_v2Size.Y);
 
             // render using System.Drawing:
@@ -191,8 +190,7 @@ namespace Pulsar4X.UI.Helpers
             // Generate Texture Handle
             GL.GenTextures(1, out oNewTexture.m_uiTextureID);
             // Tell openGL that this is a 2d texture:
-            //GL.BindTexture(TextureTarget.Texture2D, oNewTexture.m_uiTextureID);
-            Pulsar4X.WinForms.OpenTKUtilities.Use2DTexture(oNewTexture.m_uiTextureID);
+            GL.BindTexture(TextureTarget.Texture2D, oNewTexture.m_uiTextureID);
 
             // Configure Text Paramaters:
             //GL.TexEnv(TextureEnvTarget.TextureEnv, TextureEnvParameter.TextureEnvMode, (float)TextureEnvMode.Modulate);

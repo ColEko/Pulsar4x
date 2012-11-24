@@ -11,7 +11,7 @@ using log4net;
 
 namespace Pulsar4X.UI.GLUtilities
 {
-    class GLEffect
+    public class GLEffect
     {
         public static readonly ILog logger = LogManager.GetLogger(typeof(GLEffect));
 
@@ -276,6 +276,40 @@ namespace Pulsar4X.UI.GLUtilities
         //    GL.DeleteShader(iGLVertexShader);
         //    GL.DeleteShader(iGLPixelShader);
         //}
+
+
+        public void SetProjectionMatrix(ref Matrix4 a_m4Projection)
+        {
+            GL.UseProgram(m_iShaderProgramHandle);
+            GL.UniformMatrix4(m_aiShaderMatrixLocations[0], false, ref a_m4Projection);
+        }
+
+        public void SetViewMatrix(ref Matrix4 a_m4View)
+        {
+            GL.UseProgram(m_iShaderProgramHandle);
+            GL.UniformMatrix4(m_aiShaderMatrixLocations[1], false, ref a_m4View);
+        }
+
+        public void SetModelMatrix(ref Matrix4 a_m4Model)
+        {
+            GL.UseProgram(m_iShaderProgramHandle);
+            GL.UniformMatrix4(m_aiShaderMatrixLocations[2], false, ref a_m4Model);
+        }
+
+        public void StartUsing(ref Matrix4 a_m4Model)
+        {
+            GL.UseProgram(m_iShaderProgramHandle);
+            GL.UniformMatrix4(m_aiShaderMatrixLocations[2], false, ref a_m4Model);
+        }
+
+        public void StartUsing(ref Matrix4 a_m4Projection, ref Matrix4 a_m4View, ref Matrix4 a_m4Model)
+        {
+            GL.UseProgram(m_iShaderProgramHandle);
+
+            GL.UniformMatrix4(m_aiShaderMatrixLocations[0], false, ref a_m4Projection);
+            GL.UniformMatrix4(m_aiShaderMatrixLocations[1], false, ref a_m4View);
+            GL.UniformMatrix4(m_aiShaderMatrixLocations[2], false, ref a_m4Model);
+        }
 
         public void StartUsing()
         {

@@ -81,13 +81,13 @@ namespace Pulsar4X.UI.GLUtilities
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>   Constructor. </summary>
-        /// <param name="a_oShaderProgram"> The shader program. </param>
+        /// <param name="a_oEffect"> The shader program. </param>
         /// <param name="a_v3Pos">          The position of the first character. </param>
         /// <param name="a_v2Size">         Size of the first character. </param>
         /// <param name="a_oColor">         The color. </param>
         /// <param name="a_szFontDataFile"> (optional) the font data file. </param>
         ////////////////////////////////////////////////////////////////////////////////////////////////////
-        public GLFont(GLShader a_oShaderProgram, Vector3 a_v3Pos, Vector2 a_v2Size, System.Drawing.Color a_oColor, string a_szFontDataFile, string a_szText = "")
+        public GLFont(GLEffect a_oEffect, Vector3 a_v3Pos, Vector2 a_v2Size, System.Drawing.Color a_oColor, string a_szFontDataFile, string a_szText = "")
         {
             // load in data:
             m_oFontData = Helpers.ResourceManager.Instance.LoadGLFont(a_szFontDataFile);
@@ -106,7 +106,7 @@ namespace Pulsar4X.UI.GLUtilities
                 v3CharPos.X = a_v3Pos.X + i * a_v2Size.X;
                 v3CharPos.Y = a_v3Pos.Y;
                 // Create Quad and set its texture:
-                GLQuad oQuad = new GLQuad(a_oShaderProgram, v3CharPos, a_v2Size, a_oColor);
+                GLQuad oQuad = new GLQuad(a_oEffect, v3CharPos, a_v2Size, a_oColor);
                 oQuad.TextureID = m_oFontData.m_uiTextureID;
 
                 // add quad to the list:

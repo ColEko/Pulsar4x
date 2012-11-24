@@ -20,12 +20,12 @@ namespace Pulsar4X.UI.GLUtilities
     class GLCircle : GLPrimitive
     {
         /// <summary>   Constructor. </summary>
-        /// <param name="a_oShaderProgram"> The Shader program to use when rendering. </param>
+        /// <param name="a_oEffect"> The Shader program to use when rendering. </param>
         /// <param name="a_v3Pos">          The Position of the circle. </param>
         /// <param name="a_fRadus">         The Radius of the circle. </param>
         /// <param name="a_oColor">         The color of the circle. </param>
         /// <param name="a_szTexture">      (optional) the texture file. </param>
-        public GLCircle(GLShader a_oShaderProgram, Vector3 a_v3Pos, float a_fRadus, System.Drawing.Color a_oColor, string a_szTexture = "")
+        public GLCircle(GLEffect a_oEffect, Vector3 a_v3Pos, float a_fRadus, System.Drawing.Color a_oColor, string a_szTexture = "")
             : base()
         {
             // Save some stuff to member vars:
@@ -71,7 +71,7 @@ namespace Pulsar4X.UI.GLUtilities
             m_m4ModelMatrix = Matrix4.Scale(a_fRadus * 2) * Matrix4.CreateTranslation(a_v3Pos);
             
             // Set our shader program:
-            m_oShaderProgram = a_oShaderProgram;
+            m_oEffect = a_oEffect;
             
             // Load texture if specified:
             if (a_szTexture != "")
@@ -124,7 +124,7 @@ namespace Pulsar4X.UI.GLUtilities
             //#endif
         }
 
-        public GLCircle(GLShader a_oShaderProgram, Vector3 a_v3Pos, OrbitingEntity a_oOrbitEntity, System.Drawing.Color a_oColor, string a_szTexture = "")
+        public GLCircle(GLEffect a_oEffect, Vector3 a_v3Pos, OrbitingEntity a_oOrbitEntity, System.Drawing.Color a_oColor, string a_szTexture = "")
             : base()
         {
             // Save some stuff to member vars:
@@ -162,7 +162,7 @@ namespace Pulsar4X.UI.GLUtilities
             m_m4ModelMatrix = Matrix4.Scale(m_v2Size.X) * Matrix4.CreateTranslation(a_v3Pos);
 
             // Set our shader program:
-            m_oShaderProgram = a_oShaderProgram;
+            m_oEffect = a_oEffect;
 
             // Load texture if specified:
             if (a_szTexture != "")
@@ -227,17 +227,14 @@ namespace Pulsar4X.UI.GLUtilities
         public override void Render(ref Matrix4 a_m4Projection, ref Matrix4 a_m4View)
         {
             GL.BindVertexArray(m_uiVextexArrayHandle);
-            //if (OpenTKUtilities.Instance.SupportedOpenGLVersion == OpenTKUtilities.GLVersion.OpenGL2X)
-            //{
-                GL.BindBuffer(BufferTarget.ElementArrayBuffer, m_uiIndexBufferHandle);
-                GL.BindBuffer(BufferTarget.ArrayBuffer, m_uiVertexBufferHandle);
-            //}
+            GL.BindBuffer(BufferTarget.ElementArrayBuffer, m_uiIndexBufferHandle);
+            GL.BindBuffer(BufferTarget.ArrayBuffer, m_uiVertexBufferHandle);
 
-            m_oShaderProgram.StartUsing(ref m_m4ModelMatrix);
-            m_oShaderProgram.StartUsing(ref a_m4Projection);
-            m_oShaderProgram.StartUsing(ref a_m4View);
+            m_oEffect.StartUsing(ref m_m4ModelMatrix);
+            m_oEffect.StartUsing(ref a_m4Projection);
+            m_oEffect.StartUsing(ref a_m4View);
 
-            OpenTKUtilities.Use2DTexture(m_uiTextureID);
+            GL.BindTexture(TextureTarget.Texture2D, m_uiTextureID);
 
             GL.DrawElements(BeginMode.LineStrip, m_auiIndicies.Length, DrawElementsType.UnsignedShort, IntPtr.Zero);
         }
@@ -245,16 +242,13 @@ namespace Pulsar4X.UI.GLUtilities
         public override void Render(ref Matrix4 a_m4View)
         {
             GL.BindVertexArray(m_uiVextexArrayHandle);
-            //if (OpenTKUtilities.Instance.SupportedOpenGLVersion == OpenTKUtilities.GLVersion.OpenGL2X)
-            //{
-                GL.BindBuffer(BufferTarget.ElementArrayBuffer, m_uiIndexBufferHandle);
-                GL.BindBuffer(BufferTarget.ArrayBuffer, m_uiVertexBufferHandle);
-            //}
+            GL.BindBuffer(BufferTarget.ElementArrayBuffer, m_uiIndexBufferHandle);
+            GL.BindBuffer(BufferTarget.ArrayBuffer, m_uiVertexBufferHandle);
 
-            m_oShaderProgram.StartUsing(ref m_m4ModelMatrix);
-            m_oShaderProgram.StartUsing(ref a_m4View);
+            m_oEffect.StartUsing(ref m_m4ModelMatrix);
+            m_oEffect.StartUsing(ref a_m4View);
 
-            OpenTKUtilities.Use2DTexture(m_uiTextureID);
+            GL.BindTexture(TextureTarget.Texture2D, m_uiTextureID);
 
             GL.DrawElements(BeginMode.LineStrip, m_auiIndicies.Length, DrawElementsType.UnsignedShort, IntPtr.Zero);
         }
@@ -262,15 +256,12 @@ namespace Pulsar4X.UI.GLUtilities
         public override void Render()
         {
             GL.BindVertexArray(m_uiVextexArrayHandle);
-            //if (OpenTKUtilities.Instance.SupportedOpenGLVersion == OpenTKUtilities.GLVersion.OpenGL2X)
-            //{
-                GL.BindBuffer(BufferTarget.ElementArrayBuffer, m_uiIndexBufferHandle);
-                GL.BindBuffer(BufferTarget.ArrayBuffer, m_uiVertexBufferHandle);
-            //}
+            GL.BindBuffer(BufferTarget.ElementArrayBuffer, m_uiIndexBufferHandle);
+            GL.BindBuffer(BufferTarget.ArrayBuffer, m_uiVertexBufferHandle);
 
-            m_oShaderProgram.StartUsing(ref m_m4ModelMatrix);
+            m_oEffect.StartUsing(ref m_m4ModelMatrix);
 
-            OpenTKUtilities.Use2DTexture(m_uiTextureID);
+            GL.BindTexture(TextureTarget.Texture2D, m_uiTextureID);
 
             GL.DrawElements(BeginMode.LineStrip, m_auiIndicies.Length, DrawElementsType.UnsignedShort, IntPtr.Zero);
         }

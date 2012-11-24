@@ -24,5 +24,15 @@ namespace Pulsar4X.UI
                                                 "GitHub Org:\n https://github.com/Pulsar4xDevs \n\n" +
                                                 "";
 
+        /// <summary> 
+        /// The default string texture height per character 
+        /// </summary>
+        public const int DEFAULT_STRING_TEXTURE_HEIGHT_PER_CHAR = 128;
+
+        /// <summary> 
+        /// The default string texture width per character 
+        /// </summary>
+        public const int DEFAULT_STRING_TEXTURE_WIDTH_PER_CHAR = 128;
+
     }
 }
