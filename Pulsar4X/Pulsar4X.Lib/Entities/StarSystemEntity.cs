@@ -183,7 +183,7 @@ namespace Pulsar4X.Entities
         public SystemPosition Position;
 
         /// <summary>
-        /// where the contact was on the last tick.
+        /// where the entity was on the last tick.
         /// </summary>
         public SystemPosition LastPosition;
 
