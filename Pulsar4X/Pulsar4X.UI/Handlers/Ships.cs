@@ -412,7 +412,7 @@ namespace Pulsar4X.UI.Handlers
                     _CurrnetShip.ShipBFC[_CurrnetFC.componentIndex].SetPointDefenseMode((PointDefenseState)index);
 
 
-                    StarSystem CurrentSystem = _CurrnetShip.ShipsTaskGroup.Contact.Position.System;
+                    StarSystem CurrentSystem = _CurrnetShip.ShipsTaskGroup.Position.System;
 
                     if (index != 0)
                     {
@@ -443,7 +443,7 @@ namespace Pulsar4X.UI.Handlers
                         if (_CurrnetFaction.PointDefense.ContainsKey(CurrentSystem) == false)
                         {
                             String Error = String.Format("Star System {0} not found in point defense listing for {1} on {2}.", CurrentSystem, _CurrnetShip.ShipBFC[_CurrnetFC.componentIndex], _CurrnetShip);
-                            MessageEntry MessageEnter = new MessageEntry(MessageEntry.MessageType.Error, _CurrnetShip.ShipsTaskGroup.Contact.Position.System, _CurrnetShip.ShipsTaskGroup.Contact,
+                            MessageEntry MessageEnter = new MessageEntry(MessageEntry.MessageType.Error, _CurrnetShip.ShipsTaskGroup.Position.System, _CurrnetShip.ShipsTaskGroup,
                                                                   GameState.Instance.GameDateTime, GameState.Instance.LastTimestep, Error);
                             _CurrnetFaction.MessageLog.Add(MessageEnter);
                         }
@@ -472,7 +472,7 @@ namespace Pulsar4X.UI.Handlers
                 else
                 {
                     String Error = String.Format("Improper point defense state {0} assigned to BFC {1} on {2}", (PointDefenseState)index, _CurrnetFC, _CurrnetShip);
-                    MessageEntry MessageEnter = new MessageEntry(MessageEntry.MessageType.Error, _CurrnetShip.ShipsTaskGroup.Contact.Position.System, _CurrnetShip.ShipsTaskGroup.Contact,
+                    MessageEntry MessageEnter = new MessageEntry(MessageEntry.MessageType.Error, _CurrnetShip.ShipsTaskGroup.Position.System, _CurrnetShip.ShipsTaskGroup,
                                                           GameState.Instance.GameDateTime, GameState.Instance.LastTimestep, Error);
                     _CurrnetFaction.MessageLog.Add(MessageEnter);
                 }
@@ -487,7 +487,7 @@ namespace Pulsar4X.UI.Handlers
                         _CurrnetShip.ShipMFC[_CurrnetFC.componentIndex].SetPointDefenseRange(PointDefenseRange);
                     _CurrnetShip.ShipMFC[_CurrnetFC.componentIndex].SetPointDefenseMode((PointDefenseState)index);
 
-                    StarSystem CurrentSystem = _CurrnetShip.ShipsTaskGroup.Contact.Position.System;
+                    StarSystem CurrentSystem = _CurrnetShip.ShipsTaskGroup.Position.System;
 
                     if (index != 0)
                     {
@@ -519,7 +519,7 @@ namespace Pulsar4X.UI.Handlers
                         {
 #warning leave this error message in for now
                             String Error = String.Format("Star System {0} not found in point defense listing for {1} on {2}. Not necessarily a bug.", CurrentSystem, _CurrnetShip.ShipMFC[_CurrnetFC.componentIndex], _CurrnetShip);
-                            MessageEntry MessageEnter = new MessageEntry(MessageEntry.MessageType.Error, _CurrnetShip.ShipsTaskGroup.Contact.Position.System, _CurrnetShip.ShipsTaskGroup.Contact,
+                            MessageEntry MessageEnter = new MessageEntry(MessageEntry.MessageType.Error, _CurrnetShip.ShipsTaskGroup.Position.System, _CurrnetShip.ShipsTaskGroup,
                                                                   GameState.Instance.GameDateTime, GameState.Instance.LastTimestep, Error);
                             _CurrnetFaction.MessageLog.Add(MessageEnter);
                         }
@@ -554,7 +554,7 @@ namespace Pulsar4X.UI.Handlers
                 else
                 {
                     String Error = String.Format("Improper point defense state {0} assigned to MFC {1} on {2}", (PointDefenseState)index, _CurrnetFC, _CurrnetShip);
-                    MessageEntry MessageEnter = new MessageEntry(MessageEntry.MessageType.Error, _CurrnetShip.ShipsTaskGroup.Contact.Position.System, _CurrnetShip.ShipsTaskGroup.Contact,
+                    MessageEntry MessageEnter = new MessageEntry(MessageEntry.MessageType.Error, _CurrnetShip.ShipsTaskGroup.Position.System, _CurrnetShip.ShipsTaskGroup,
                                                           GameState.Instance.GameDateTime, GameState.Instance.LastTimestep, Error);
                     _CurrnetFaction.MessageLog.Add(MessageEnter);
                 }
@@ -747,10 +747,10 @@ namespace Pulsar4X.UI.Handlers
                 if (isBFC == true)
                 {
                     int count = 0;
-                    if (_CurrnetFaction.DetectedContactLists.ContainsKey(_CurrnetShip.ShipsTaskGroup.Contact.Position.System) == true)
+                    if (_CurrnetFaction.DetectedContactLists.ContainsKey(_CurrnetShip.ShipsTaskGroup.Position.System) == true)
                     {
 
-                        foreach (KeyValuePair<ShipTN, FactionContact> pair in _CurrnetFaction.DetectedContactLists[_CurrnetShip.ShipsTaskGroup.Contact.Position.System].DetectedContacts)
+                        foreach (KeyValuePair<ShipTN, FactionContact> pair in _CurrnetFaction.DetectedContactLists[_CurrnetShip.ShipsTaskGroup.Position.System].DetectedContacts)
                         {
                             if (pair.Value.active == true)
                             {
@@ -779,7 +779,7 @@ namespace Pulsar4X.UI.Handlers
 
                         if (count <= m_oDetailsPanel.ContactListBox.SelectedIndex)
                         {
-                            foreach (KeyValuePair<OrdnanceGroupTN, FactionContact> pair in _CurrnetFaction.DetectedContactLists[_CurrnetShip.ShipsTaskGroup.Contact.Position.System].DetectedMissileContacts)
+                            foreach (KeyValuePair<OrdnanceGroupTN, FactionContact> pair in _CurrnetFaction.DetectedContactLists[_CurrnetShip.ShipsTaskGroup.Position.System].DetectedMissileContacts)
                             {
                                 if (pair.Value.active == true)
                                 {
@@ -811,12 +811,12 @@ namespace Pulsar4X.UI.Handlers
                 else
                 {
                     int count = 0;
-                    if (_CurrnetFaction.DetectedContactLists.ContainsKey(_CurrnetShip.ShipsTaskGroup.Contact.Position.System) == true)
+                    if (_CurrnetFaction.DetectedContactLists.ContainsKey(_CurrnetShip.ShipsTaskGroup.Position.System) == true)
                     {
-                        foreach (KeyValuePair<ShipTN, FactionContact> pair in _CurrnetFaction.DetectedContactLists[_CurrnetShip.ShipsTaskGroup.Contact.Position.System].DetectedContacts)
+                        foreach (KeyValuePair<ShipTN, FactionContact> pair in _CurrnetFaction.DetectedContactLists[_CurrnetShip.ShipsTaskGroup.Position.System].DetectedContacts)
                         {
                             float distance;
-                            _CurrnetShip.ShipsTaskGroup.Contact.DistTable.GetDistance(pair.Key.ShipsTaskGroup.Contact, out distance);
+                            _CurrnetShip.ShipsTaskGroup.DistTable.GetDistance(pair.Key.ShipsTaskGroup, out distance);
                             int TCS = pair.Key.TotalCrossSection;
                             int detectFactor = _CurrnetShip.ShipMFC[_CurrnetFC.componentIndex].mFCSensorDef.GetActiveDetectionRange(TCS, -1);
 
@@ -858,10 +858,10 @@ namespace Pulsar4X.UI.Handlers
 
                         if (count <= m_oDetailsPanel.ContactListBox.SelectedIndex)
                         {
-                            foreach (KeyValuePair<OrdnanceGroupTN, FactionContact> pair in _CurrnetFaction.DetectedContactLists[_CurrnetShip.ShipsTaskGroup.Contact.Position.System].DetectedMissileContacts)
+                            foreach (KeyValuePair<OrdnanceGroupTN, FactionContact> pair in _CurrnetFaction.DetectedContactLists[_CurrnetShip.ShipsTaskGroup.Position.System].DetectedMissileContacts)
                             {
                                 float distance;
-                                _CurrnetShip.ShipsTaskGroup.Contact.DistTable.GetDistance(pair.Key.contact, out distance);
+                                _CurrnetShip.ShipsTaskGroup.DistTable.GetDistance(pair.Key, out distance);
                                 int MSP = (int)Math.Ceiling(pair.Key.missiles[0].missileDef.size);
                                 int sig = -1;
                                 int detectFactor = -1;
@@ -946,7 +946,7 @@ namespace Pulsar4X.UI.Handlers
                     /// </summary>
                     _CurrnetShip.ShipBFC[_CurrnetFC.componentIndex].SetPointDefenseMode(PointDefenseState.None);
 
-                    StarSystem CurrentSystem = _CurrnetShip.ShipsTaskGroup.Contact.Position.System;
+                    StarSystem CurrentSystem = _CurrnetShip.ShipsTaskGroup.Position.System;
 
                     /// <summary>
                     /// This FC might not necessarily be in the point defense list at all, this is just a precautionary check.
@@ -1009,7 +1009,7 @@ namespace Pulsar4X.UI.Handlers
                     /// </summary>
                     _CurrnetShip.ShipMFC[_CurrnetFC.componentIndex].SetPointDefenseMode(PointDefenseState.None);
 
-                    StarSystem CurrentSystem = _CurrnetShip.ShipsTaskGroup.Contact.Position.System;
+                    StarSystem CurrentSystem = _CurrnetShip.ShipsTaskGroup.Position.System;
 
                     /// <summary>
                     /// This FC might not necessarily be in the point defense list at all, this is just a precautionary check.
@@ -1686,10 +1686,10 @@ namespace Pulsar4X.UI.Handlers
                     /// <summary>
                     /// BFC range is so short that we'll just print all contacts and let the user sort em out.
                     /// </summary>
-                    if (_CurrnetFaction.DetectedContactLists.ContainsKey(_CurrnetShip.ShipsTaskGroup.Contact.Position.System) == true)
+                    if (_CurrnetFaction.DetectedContactLists.ContainsKey(_CurrnetShip.ShipsTaskGroup.Position.System) == true)
                     {
                         #region BFC contacts, All are printed.
-                        foreach (KeyValuePair<ShipTN, FactionContact> pair in _CurrnetFaction.DetectedContactLists[_CurrnetShip.ShipsTaskGroup.Contact.Position.System].DetectedContacts)
+                        foreach (KeyValuePair<ShipTN, FactionContact> pair in _CurrnetFaction.DetectedContactLists[_CurrnetShip.ShipsTaskGroup.Position.System].DetectedContacts)
                         {
                             String TH = "";
                             if (pair.Value.thermal == true)
@@ -1714,12 +1714,12 @@ namespace Pulsar4X.UI.Handlers
                             m_oDetailsPanel.ContactListBox.Items.Add(Entry);
                         }
 
-                        foreach (KeyValuePair<OrdnanceGroupTN, FactionContact> pair in _CurrnetFaction.DetectedContactLists[_CurrnetShip.ShipsTaskGroup.Contact.Position.System].DetectedMissileContacts)
+                        foreach (KeyValuePair<OrdnanceGroupTN, FactionContact> pair in _CurrnetFaction.DetectedContactLists[_CurrnetShip.ShipsTaskGroup.Position.System].DetectedMissileContacts)
                         {
                             if (pair.Key.missiles.Count == 0)
                             {
                                 String Error = String.Format("BuildContactList has an empty missileGroup in detectedMissileContacts.");
-                                MessageEntry MessageEnter = new MessageEntry(MessageEntry.MessageType.Error, _CurrnetShip.ShipsTaskGroup.Contact.Position.System, _CurrnetShip.ShipsTaskGroup.Contact,
+                                MessageEntry MessageEnter = new MessageEntry(MessageEntry.MessageType.Error, _CurrnetShip.ShipsTaskGroup.Position.System, _CurrnetShip.ShipsTaskGroup,
                                                                       GameState.Instance.GameDateTime, GameState.Instance.LastTimestep, Error);
                                 _CurrnetFaction.MessageLog.Add(MessageEnter);
                                 continue;
@@ -1741,7 +1741,7 @@ namespace Pulsar4X.UI.Handlers
                                 else
                                 {
                                     String Error = String.Format("BuildContactList has a missile detected via EM that has no Active sensor(which is the only way it can be detected via EM)");
-                                    MessageEntry MessageEnter = new MessageEntry(MessageEntry.MessageType.Error, _CurrnetShip.ShipsTaskGroup.Contact.Position.System, _CurrnetShip.ShipsTaskGroup.Contact,
+                                    MessageEntry MessageEnter = new MessageEntry(MessageEntry.MessageType.Error, _CurrnetShip.ShipsTaskGroup.Position.System, _CurrnetShip.ShipsTaskGroup,
                                                                           GameState.Instance.GameDateTime, GameState.Instance.LastTimestep, Error);
                                     _CurrnetFaction.MessageLog.Add(MessageEnter);
                                 }
@@ -1766,12 +1766,12 @@ namespace Pulsar4X.UI.Handlers
                     /// <summary>
                     /// Each MFC entry will be range checked, also there have been some tick errors, this may be the place to hunt them down.
                     /// </summary>
-                    if (_CurrnetFaction.DetectedContactLists.ContainsKey(_CurrnetShip.ShipsTaskGroup.Contact.Position.System) == true)
+                    if (_CurrnetFaction.DetectedContactLists.ContainsKey(_CurrnetShip.ShipsTaskGroup.Position.System) == true)
                     {
-                        foreach (KeyValuePair<ShipTN, FactionContact> pair in _CurrnetFaction.DetectedContactLists[_CurrnetShip.ShipsTaskGroup.Contact.Position.System].DetectedContacts)
+                        foreach (KeyValuePair<ShipTN, FactionContact> pair in _CurrnetFaction.DetectedContactLists[_CurrnetShip.ShipsTaskGroup.Position.System].DetectedContacts)
                         {
                             float distance;
-                            _CurrnetShip.ShipsTaskGroup.Contact.DistTable.GetDistance(pair.Key.ShipsTaskGroup.Contact, out distance);
+                            _CurrnetShip.ShipsTaskGroup.DistTable.GetDistance(pair.Key.ShipsTaskGroup, out distance);
 
                             int TCS = pair.Key.TotalCrossSection;
                             int detectFactor = _CurrnetShip.ShipMFC[_CurrnetFC.componentIndex].mFCSensorDef.GetActiveDetectionRange(TCS, -1);
@@ -1803,19 +1803,19 @@ namespace Pulsar4X.UI.Handlers
                             }
                         }
 
-                        foreach (KeyValuePair<OrdnanceGroupTN, FactionContact> pair in _CurrnetFaction.DetectedContactLists[_CurrnetShip.ShipsTaskGroup.Contact.Position.System].DetectedMissileContacts)
+                        foreach (KeyValuePair<OrdnanceGroupTN, FactionContact> pair in _CurrnetFaction.DetectedContactLists[_CurrnetShip.ShipsTaskGroup.Position.System].DetectedMissileContacts)
                         {
                             if (pair.Key.missiles.Count == 0)
                             {
                                 String Error = String.Format("BuildContactList has an empty missileGroup in detectedMissileContacts.");
-                                MessageEntry MessageEnter = new MessageEntry(MessageEntry.MessageType.Error, _CurrnetShip.ShipsTaskGroup.Contact.Position.System, _CurrnetShip.ShipsTaskGroup.Contact,
+                                MessageEntry MessageEnter = new MessageEntry(MessageEntry.MessageType.Error, _CurrnetShip.ShipsTaskGroup.Position.System, _CurrnetShip.ShipsTaskGroup,
                                                                       GameState.Instance.GameDateTime, GameState.Instance.LastTimestep, Error);
                                 _CurrnetFaction.MessageLog.Add(MessageEnter);
                                 continue;
                             }
 
                             float distance;
-                            _CurrnetShip.ShipsTaskGroup.Contact.DistTable.GetDistance(pair.Key.contact, out distance);
+                            _CurrnetShip.ShipsTaskGroup.DistTable.GetDistance(pair.Key, out distance);
 
                             int MSP = (int)Math.Ceiling(pair.Key.missiles[0].missileDef.size);
                             int sig = -1;
@@ -1867,7 +1867,7 @@ namespace Pulsar4X.UI.Handlers
                                     else
                                     {
                                         String Error = String.Format("BuildContactList has a missile detected via EM that has no Active sensor(which is the only way it can be detected via EM)");
-                                        MessageEntry MessageEnter = new MessageEntry(MessageEntry.MessageType.Error, _CurrnetShip.ShipsTaskGroup.Contact.Position.System, _CurrnetShip.ShipsTaskGroup.Contact,
+                                        MessageEntry MessageEnter = new MessageEntry(MessageEntry.MessageType.Error, _CurrnetShip.ShipsTaskGroup.Position.System, _CurrnetShip.ShipsTaskGroup,
                                                                               GameState.Instance.GameDateTime, GameState.Instance.LastTimestep, Error);
                                         _CurrnetFaction.MessageLog.Add(MessageEnter);
                                     }

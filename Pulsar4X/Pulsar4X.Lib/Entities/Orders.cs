@@ -167,7 +167,7 @@ namespace Pulsar4X.Entities
         public Orders(Constants.ShipTN.OrderType TypeOrder, int SecondaryOrder, int TertiaryOrder, int Delay, TaskGroupTN TaskGroupOrder)
         {
             TypeOf = TypeOrder;
-            Target = TaskGroupOrder.Contact;
+            Target = TaskGroupOrder;
             Secondary = SecondaryOrder;
             Tertiary = TertiaryOrder;
             TaskGroup = TaskGroupOrder;
@@ -280,7 +280,7 @@ namespace Pulsar4X.Entities
         public Orders(Constants.ShipTN.OrderType TypeOrder, int SecondaryOrder, int TertiaryOrder, int Delay, ShipTN ShipsOrder)
         {
             TypeOf = TypeOrder;
-            Target = ShipsOrder.ShipsTaskGroup.Contact;
+            Target = ShipsOrder.ShipsTaskGroup;
             Secondary = SecondaryOrder;
             Tertiary = TertiaryOrder;
             ShipOrder = ShipsOrder;

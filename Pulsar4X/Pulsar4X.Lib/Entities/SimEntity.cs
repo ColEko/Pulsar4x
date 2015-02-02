@@ -107,6 +107,26 @@ namespace Pulsar4X.Entities
             TypeOfInterrupt = Type;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns>Time in seconds that the simulation advanced.</returns>
+        public int ExecutePulse(int desiredTimeInSeconds)
+        {
+            int timeAdvanced = 0;
+            int subpulseTime = desiredTimeInSeconds;
+
+            foreach (StarSystem system in GameState.Instance.StarSystems)
+            {
+                int maxSubpulse = system.GetMaxSubpulse(subpulseTime);
+                if (maxSubpulse < subpulseTime)
+                {
+                    subpulseTime = maxSubpulse;
+                }
+            }
+            return 0;
+        }
+
 
         /// <summary>
         /// Subpulse handler will decide what the subpulse/time setting should be.
@@ -203,7 +223,7 @@ namespace Pulsar4X.Entities
                 ShipTN Large1 = FleetIntercept1.Ships[ShipID1];
                 ShipTN Large2 = FleetIntercept2.Ships[ShipID2];
 
-                StarSystem CurrentSystem = FleetIntercept1.Contact.Position.System;
+                StarSystem CurrentSystem = FleetIntercept1.Position.System;
 
                 /// <summary>
                 /// get the distance, which involves going to the distance table(as opposed to recalculating distance here).
@@ -212,7 +232,7 @@ namespace Pulsar4X.Entities
                 int TGID2 = CurrentSystem.SystemContactList.IndexOf(FleetIntercept2.Contact);
 
                 float dist;
-                FleetIntercept1.Contact.DistTable.GetDistance(FleetIntercept2.Contact, out dist);
+                FleetIntercept1.DistTable.GetDistance(FleetIntercept2, out dist);
 
                 int sig1 = Large1.TotalCrossSection - 1;
                 int sig2 = Large2.TotalCrossSection - 1;
@@ -690,10 +710,10 @@ namespace Pulsar4X.Entities
                                 /// <summary>
                                 /// Same System as target and target exists.
                                 /// </summary>
-                                if (ShipToFire.ShipsTaskGroup.Contact.Position.System == Target.ShipsTaskGroup.Contact.Position.System && Target.IsDestroyed == false)
+                                if (ShipToFire.ShipsTaskGroup.Position.System == Target.ShipsTaskGroup.Position.System && Target.IsDestroyed == false)
                                 {
 
-                                    StarSystem CurSystem = ShipToFire.ShipsTaskGroup.Contact.Position.System;
+                                    StarSystem CurSystem = ShipToFire.ShipsTaskGroup.Position.System;
                                     int MyID = CurSystem.SystemContactList.IndexOf(ShipToFire.ShipsTaskGroup.Contact);
                                     int TargetID = CurSystem.SystemContactList.IndexOf(Target.ShipsTaskGroup.Contact);
 
@@ -724,7 +744,7 @@ namespace Pulsar4X.Entities
                                                 }
 
                                                 /*String Fire = String.Format("Weapons Fired: {0}", WF );
-                                                MessageEntry Entry = new MessageEntry(P[loop].TaskGroups[0].Contact.Position.System, P[loop].TaskGroups[0].Contact, GameState.Instance.GameDateTime, (int)CurrentSecond, Fire);
+                                                MessageEntry Entry = new MessageEntry(P[loop].TaskGroups[0].Position.System, P[loop].TaskGroups[0].Contact, GameState.Instance.GameDateTime, (int)CurrentSecond, Fire);
                                                 P[loop].MessageLog.Add(Entry);*/
 
                                                 if (WF == true)
@@ -755,9 +775,9 @@ namespace Pulsar4X.Entities
                                 /// <summary>
                                 /// Same system, and target has missiles to be destroyed.
                                 /// </summary>
-                                if (ShipToFire.ShipsTaskGroup.Contact.Position.System == Target.contact.Position.System && (Target.missilesDestroyed != Target.missiles.Count))
+                                if (ShipToFire.ShipsTaskGroup.Position.System == Target.Position.System && (Target.missilesDestroyed != Target.missiles.Count))
                                 {
-                                    StarSystem CurSystem = ShipToFire.ShipsTaskGroup.Contact.Position.System;
+                                    StarSystem CurSystem = ShipToFire.ShipsTaskGroup.Position.System;
                                     int MyID = CurSystem.SystemContactList.IndexOf(ShipToFire.ShipsTaskGroup.Contact);
                                     int TargetID = CurSystem.SystemContactList.IndexOf(Target.contact);
 
@@ -945,7 +965,7 @@ namespace Pulsar4X.Entities
 
                         foreach (Faction CurrentFaction in P)
                         {
-                            StarSystem CurSystem = Ship.ShipsTaskGroup.Contact.Position.System;
+                            StarSystem CurSystem = Ship.ShipsTaskGroup.Position.System;
 
                             /// <summary>
                             /// remove destroyed ships from the detected contacts list.
@@ -1073,7 +1093,7 @@ namespace Pulsar4X.Entities
                             /// </summary>
 
                             String Entry = String.Format("Taskgroup {0} cannot find target, orders canceled.", TaskGroupOrdered.Name);
-                            MessageEntry Entry2 = new MessageEntry(MessageEntry.MessageType.OrdersNotCompleted, TaskGroupOrdered.Contact.Position.System, TaskGroupOrdered.Contact,
+                            MessageEntry Entry2 = new MessageEntry(MessageEntry.MessageType.OrdersNotCompleted, TaskGroupOrdered.Position.System, TaskGroupOrdered,
                                                                    GameState.Instance.GameDateTime, GameState.Instance.LastTimestep, Entry);
                             TaskGroupOrdered.TaskGroupFaction.MessageLog.Add(Entry2);
 
@@ -1115,7 +1135,7 @@ namespace Pulsar4X.Entities
                             /// </summary>
 
                             String Entry = String.Format("Taskgroup {0} cannot find target, orders canceled.", TaskGroupOrdered.Name);
-                            MessageEntry Entry2 = new MessageEntry(MessageEntry.MessageType.OrdersNotCompleted, TaskGroupOrdered.Contact.Position.System, TaskGroupOrdered.Contact,
+                            MessageEntry Entry2 = new MessageEntry(MessageEntry.MessageType.OrdersNotCompleted, TaskGroupOrdered.Position.System, TaskGroupOrdered,
                                                                    GameState.Instance.GameDateTime, GameState.Instance.LastTimestep, Entry);
                             TaskGroupOrdered.TaskGroupFaction.MessageLog.Add(Entry2);
 
@@ -1131,7 +1151,7 @@ namespace Pulsar4X.Entities
             }
 
             Ship.ShipsTaskGroup.clearAllOrders();
-            Ship.ShipsTaskGroup.Contact.Position.System.SystemContactList.Remove(Ship.ShipsTaskGroup.Contact);
+            Ship.ShipsTaskGroup.Position.System.SystemContactList.Remove(Ship.ShipsTaskGroup.Contact);
             Ship.ShipsFaction.TaskGroups.Remove(Ship.ShipsTaskGroup);
         }
 
@@ -1253,7 +1273,7 @@ namespace Pulsar4X.Entities
             /// </summary>
             foreach (Faction faction in P)
             {
-                StarSystem CurSystem = OGRemove.contact.Position.System;
+                StarSystem CurSystem = OGRemove.Position.System;
                 if (faction.DetectedContactLists.ContainsKey(CurSystem) == true)
                 {
                     if (faction.DetectedContactLists[CurSystem].DetectedMissileContacts.ContainsKey(OGRemove) == true)
@@ -1271,7 +1291,7 @@ namespace Pulsar4X.Entities
             OGRemove.missiles.Clear();
 
             Faction Owner = OGRemove.ordnanceGroupFaction;
-            StarSystem CurrentSystem = OGRemove.contact.Position.System;
+            StarSystem CurrentSystem = OGRemove.Position.System;
 
             CurrentSystem.SystemContactList.Remove(OGRemove.contact);
             Owner.MissileGroups.Remove(OGRemove);

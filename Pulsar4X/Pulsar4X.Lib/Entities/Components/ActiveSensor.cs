@@ -699,7 +699,7 @@ namespace Pulsar4X.Entities.Components
                         else
                         {
                             String Msg = String.Format("No ordnance {0} on ship {1} is available for Launch Tube {2}", LaunchTube.Name, FiredFrom.Name, LaunchTube.Name);
-                            MessageEntry newMessage = new MessageEntry(MessageEntry.MessageType.FiringNoAvailableOrdnance, TG.Contact.Position.System, TG.Contact,
+                            MessageEntry newMessage = new MessageEntry(MessageEntry.MessageType.FiringNoAvailableOrdnance, TG.Position.System, TG,
                                                                        GameState.Instance.GameDateTime, GameState.Instance.LastTimestep, Msg);
                             TG.TaskGroupFaction.MessageLog.Add(newMessage);
                         }
@@ -708,14 +708,14 @@ namespace Pulsar4X.Entities.Components
                     else if (LaunchTube.isDestroyed == true)
                     {
                         String Msg = String.Format("Destroyed launch tube {0} is still attached to {1}'s MFC", LaunchTube.Name, FiredFrom.Name);
-                        MessageEntry newMessage = new MessageEntry(MessageEntry.MessageType.Error, TG.Contact.Position.System, TG.Contact,
+                        MessageEntry newMessage = new MessageEntry(MessageEntry.MessageType.Error, TG.Position.System, TG,
                                                                    GameState.Instance.GameDateTime, GameState.Instance.LastTimestep, Msg);
                         TG.TaskGroupFaction.MessageLog.Add(newMessage);
                     }
                     else if (LaunchTube.loadedOrdnance == null)
                     {
                         String Msg = String.Format("No loaded ordnance for launch tube {0} on ship {1}", LaunchTube.Name, FiredFrom.Name);
-                        MessageEntry newMessage = new MessageEntry(MessageEntry.MessageType.FiringNoLoadedOrdnance, TG.Contact.Position.System, TG.Contact,
+                        MessageEntry newMessage = new MessageEntry(MessageEntry.MessageType.FiringNoLoadedOrdnance, TG.Position.System, TG,
                                                                    GameState.Instance.GameDateTime, GameState.Instance.LastTimestep, Msg);
                         TG.TaskGroupFaction.MessageLog.Add(newMessage);
                     }
@@ -837,7 +837,7 @@ namespace Pulsar4X.Entities.Components
                     else
                     {
                         String Msg = String.Format("No ordnance {0} on ship {1} is available for Launch Tube {2} in PD Mode", LaunchTube.Name, FiredFrom.Name, LaunchTube.Name);
-                        MessageEntry newMessage = new MessageEntry(MessageEntry.MessageType.FiringNoAvailableOrdnance, TG.Contact.Position.System, TG.Contact,
+                        MessageEntry newMessage = new MessageEntry(MessageEntry.MessageType.FiringNoAvailableOrdnance, TG.Position.System, TG,
                                                                    GameState.Instance.GameDateTime, GameState.Instance.LastTimestep, Msg);
                         TG.TaskGroupFaction.MessageLog.Add(newMessage);
                     }
@@ -846,14 +846,14 @@ namespace Pulsar4X.Entities.Components
                 else if (LaunchTube.isDestroyed == true)
                 {
                     String Msg = String.Format("Destroyed launch tube {0} is still attached to {1}'s MFC in PD Mode", LaunchTube.Name, FiredFrom.Name);
-                    MessageEntry newMessage = new MessageEntry(MessageEntry.MessageType.Error, TG.Contact.Position.System, TG.Contact,
+                    MessageEntry newMessage = new MessageEntry(MessageEntry.MessageType.Error, TG.Position.System, TG,
                                                                GameState.Instance.GameDateTime, GameState.Instance.LastTimestep, Msg);
                     TG.TaskGroupFaction.MessageLog.Add(newMessage);
                 }
                 else if (LaunchTube.loadedOrdnance == null)
                 {
                     String Msg = String.Format("No loaded ordnance for launch tube {0} on ship {1} in PD Mode", LaunchTube.Name, FiredFrom.Name);
-                    MessageEntry newMessage = new MessageEntry(MessageEntry.MessageType.FiringNoLoadedOrdnance, TG.Contact.Position.System, TG.Contact,
+                    MessageEntry newMessage = new MessageEntry(MessageEntry.MessageType.FiringNoLoadedOrdnance, TG.Position.System, TG,
                                                                GameState.Instance.GameDateTime, GameState.Instance.LastTimestep, Msg);
                     TG.TaskGroupFaction.MessageLog.Add(newMessage);
                 }

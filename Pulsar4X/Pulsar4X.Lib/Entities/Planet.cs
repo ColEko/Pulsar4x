@@ -283,8 +283,8 @@ namespace Pulsar4X.Entities
             ///</summary>
             foreach (TaskGroupTN TaskGroup in TaskGroupsInOrbit)
             {
-                TaskGroup.Contact.Position.X = Position.X;
-                TaskGroup.Contact.Position.Y = Position.Y;
+                TaskGroup.Position.X = Position.X;
+                TaskGroup.Position.Y = Position.Y;
             }
         }
 

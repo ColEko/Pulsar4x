@@ -27,7 +27,7 @@ namespace Pulsar4X.Entities
         public static bool FinalDefensiveFire(BindingList<Faction> P, OrdnanceTN Missile, Random RNG)
         {
             bool Intercept = false;
-            StarSystem CurrentSystem = Missile.missileGroup.contact.Position.System;
+            StarSystem CurrentSystem = Missile.missileGroup.Position.System;
             float PointBlank = 10000.0f / (float)Constants.Units.KM_PER_AU;
 
             /// <summary>
@@ -78,7 +78,7 @@ namespace Pulsar4X.Entities
                                         /// <summary>
                                         /// dist is in AU.
                                         /// </summary>
-                                        Missile.missileGroup.contact.DistTable.GetDistance(Ship.ShipsTaskGroup.Contact, out dist);
+                                        Missile.missileGroup.DistTable.GetDistance(Ship.ShipsTaskGroup, out dist);
 
                                         /// <summary>
                                         /// if distance is less than the 10k km threshold attempt to intercept at Point blank range.
@@ -205,7 +205,7 @@ namespace Pulsar4X.Entities
                             /// </summary>
                             float dist;
 
-                            DetectedMissileGroup.contact.DistTable.GetDistance(Ship.ShipsTaskGroup.Contact, out dist);
+                            DetectedMissileGroup.DistTable.GetDistance(Ship.ShipsTaskGroup, out dist);
 
                             /// <summary>
                             /// Only bother with checks here that are within the maximum beam distance.
@@ -358,7 +358,7 @@ namespace Pulsar4X.Entities
                             /// </summary>
                             float dist;
 
-                            DetectedMissileGroup.contact.DistTable.GetDistance(Ship.ShipsTaskGroup.Contact, out dist);
+                            DetectedMissileGroup.DistTable.GetDistance(Ship.ShipsTaskGroup, out dist);
 
 
                             float MFCEngageDistKm = ShipMissileFC.mFCSensorDef.maxRange;

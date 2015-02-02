@@ -213,5 +213,49 @@ namespace Pulsar4X.Entities
                 }
             }
         }
+
+        /// <summary>
+        /// Finds the max amount of time this system can run.
+        /// </summary>
+        /// <param name="subpulseTime">Requested subpulse time.</param>
+        /// <returns></returns>
+        internal int GetMaxSubpulse(int subpulseTime)
+        {
+            foreach (TaskGroupTN taskGroup in TaskGroups)
+            {
+                int maxSubpulse = taskGroup.GetMaxSubpulse(subpulseTime);
+                if (maxSubpulse < subpulseTime)
+                {
+                    subpulseTime = maxSubpulse;
+                }
+            }
+
+            foreach (Population population in Populations)
+            {
+                int maxSubpulse = population.GetMaxSubpulse(subpulseTime);
+                if (maxSubpulse < subpulseTime)
+                {
+                    subpulseTime = maxSubpulse;
+                }
+            }
+
+            foreach (OrdnanceGroupTN ordnanceGroup in OrdnanceGroups)
+            {
+                int maxSubpulse = ordnanceGroup.GetMaxSubpulse(subpulseTime);
+                if (maxSubpulse < subpulseTime)
+                {
+                    subpulseTime = maxSubpulse;
+                }
+            }
+
+            foreach (TaskGroupTN taskGroup in TaskGroups)
+            {
+
+            }
+
+            return subpulseTime;
+        }
+
+
     }
 }

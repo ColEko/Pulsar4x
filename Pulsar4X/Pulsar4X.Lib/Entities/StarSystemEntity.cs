@@ -93,12 +93,104 @@ namespace Pulsar4X.Entities
         }
     }
 
+    public class DistanceTable
+    {
+        /// <summary>
+        /// Parent contact of this table.
+        /// </summary>
+        private StarSystemEntity m_parent;
+
+        /// <summary>
+        /// Lookup referances for this table.
+        /// </summary>
+        private Dictionary<StarSystemEntity, float> m_distances;
+        private Dictionary<StarSystemEntity, int> m_lastUpdateSecond;
+        private Dictionary<StarSystemEntity, int> m_lastUpdateYear;
+
+        /// <summary>
+        /// Calculates distance between the parent and the specified contact.
+        /// distance parameter is garenteed to be populated.
+        /// </summary>
+        /// <param name="contact"></param>
+        /// <param name="distance"></param>
+        /// <returns>true if distance was already in table. False if it distance was calculated.</returns>
+        public bool GetDistance(StarSystemEntity entity, out float distance)
+        {
+            if (m_distances.TryGetValue(entity, out distance))
+            {
+                if (m_lastUpdateSecond[entity] == GameState.Instance.CurrentSecond && m_lastUpdateYear[entity] == GameState.Instance.CurrentYear)
+                {
+                    return true;
+                }
+            }
+            distance = m_parent.Position.GetDistanceTo(entity.Position);
+            UpdateDistance(entity, distance);
+            entity.DistTable.UpdateDistance(m_parent, distance);
+            return false;
+        }
+
+        /// <summary>
+        /// Public constructor.
+        /// </summary>
+        /// <param name="parent"></param>
+        public DistanceTable(StarSystemEntity parent)
+        {
+            m_distances = new Dictionary<StarSystemEntity, float>();
+            m_lastUpdateSecond = new Dictionary<StarSystemEntity, int>();
+            m_lastUpdateYear = new Dictionary<StarSystemEntity, int>();
+            m_parent = parent;
+        }
+
+        /// <summary>
+        /// Updates/Adds the contact in the distance table with the correct distance/timestamp.
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="distance"></param>
+        private void UpdateDistance(StarSystemEntity entity, float distance)
+        {
+            m_distances[entity] = distance;
+            m_lastUpdateSecond[entity] = GameState.Instance.CurrentSecond;
+            m_lastUpdateYear[entity] = GameState.Instance.CurrentYear;
+        }
+
+        /// <summary>
+        /// Clears the distance table.
+        /// </summary>
+        public void Clear()
+        {
+            m_distances.Clear();
+            m_lastUpdateSecond.Clear();
+            m_lastUpdateYear.Clear();
+        }
+
+        /// <summary>
+        /// Moves the specified contact from the distance table.
+        /// </summary>
+        /// <param name="entity"></param>
+        public void Remove(StarSystemEntity entity)
+        {
+            m_distances.Remove(entity);
+            m_lastUpdateSecond.Remove(entity);
+            m_lastUpdateYear.Remove(entity);
+        }
+    }
+
     public abstract class StarSystemEntity : GameEntity
     {
         /// <summary>
         /// Current System and Position of the entity.
         /// </summary>
         public SystemPosition Position;
+
+        /// <summary>
+        /// where the contact was on the last tick.
+        /// </summary>
+        public SystemPosition LastPosition;
+
+        /// <summary>
+        /// distance between this entity and the other entities in the system in AU.
+        /// </summary>
+        public DistanceTable DistTable { get; set; }
 
         /// <summary>
         /// Type of entity that is represented here.
@@ -108,6 +200,7 @@ namespace Pulsar4X.Entities
         public StarSystemEntity()
             : base()
         {
+            DistTable = new DistanceTable(this);
         }
     }
 }

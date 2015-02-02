@@ -556,14 +556,14 @@ namespace Pulsar4X.UI.SceenGraph
             GLUtilities.GLFont oNameLable;
             GLUtilities.GLQuad oContactQuad;
 
-            switch (oContact.SSEntity)
+            switch (oContact.Entity.SSEntity)
             {
                 case StarSystemEntityType.TaskGroup:
                     TaskGroupTN TaskGroup = oContact.Entity as TaskGroupTN;
                     oContactElement = new ContactElement(a_oDefaultEffect, oContact);
                     oContactElement.EntityID = oContact.Id;
 
-                    v3ContactPos = new Vector3((float)TaskGroup.Contact.Position.X, (float)TaskGroup.Contact.Position.Y, 0.0f);
+                    v3ContactPos = new Vector3((float)TaskGroup.Position.X, (float)TaskGroup.Position.Y, 0.0f);
 
                     oContactQuad = new GLUtilities.GLQuad(a_oDefaultEffect,
                                                                     v3ContactPos,
@@ -586,7 +586,7 @@ namespace Pulsar4X.UI.SceenGraph
                     oContactElement = new ContactElement(a_oDefaultEffect, oContact);
                     oContactElement.EntityID = oContact.Id;
 
-                    v3ContactPos = new Vector3((float)MissileGroup.contact.Position.X, (float)MissileGroup.contact.Position.Y, 0.0f);
+                    v3ContactPos = new Vector3((float)MissileGroup.Position.X, (float)MissileGroup.Position.Y, 0.0f);
 
                     oContactQuad = new GLUtilities.GLQuad(a_oDefaultEffect,
                                                                 v3ContactPos,

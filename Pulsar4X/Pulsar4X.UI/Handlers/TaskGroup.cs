@@ -897,13 +897,13 @@ namespace Pulsar4X.UI.Handlers
         private void AddPlanetsToList()
         {
 
-            for (int loop = 0; loop < CurrentTaskGroup.Contact.Position.System.Stars.Count; loop++)
+            for (int loop = 0; loop < CurrentTaskGroup.Position.System.Stars.Count; loop++)
             {
-                for (int loop2 = 0; loop2 < CurrentTaskGroup.Contact.Position.System.Stars[loop].Planets.Count; loop2++)
+                for (int loop2 = 0; loop2 < CurrentTaskGroup.Position.System.Stars[loop].Planets.Count; loop2++)
                 {
-                    //m_oTaskGroupPanel.SystemLocationsListBox.Items.Add(CurrentTaskGroup.Contact.Position.System.Stars[loop].Planets[loop2]);
-                    string keyName = CurrentTaskGroup.Contact.Position.System.Stars[loop].Planets[loop2].Name;
-                    GameEntity entObj = CurrentTaskGroup.Contact.Position.System.Stars[loop].Planets[loop2];
+                    //m_oTaskGroupPanel.SystemLocationsListBox.Items.Add(CurrentTaskGroup.Position.System.Stars[loop].Planets[loop2]);
+                    string keyName = CurrentTaskGroup.Position.System.Stars[loop].Planets[loop2].Name;
+                    GameEntity entObj = CurrentTaskGroup.Position.System.Stars[loop].Planets[loop2];
                     SystemListObject.ListEntityType entType = SystemListObject.ListEntityType.Planets;
                     SystemListObject valueObj = new SystemListObject(entType, entObj);
                     SystemLocationGuidDict.Add(entObj.Id, keyName);
@@ -914,7 +914,7 @@ namespace Pulsar4X.UI.Handlers
 
         private void AddJumpPointsToList()
         {
-            foreach (JumpPoint jp in CurrentTaskGroup.Contact.Position.System.JumpPoints)
+            foreach (JumpPoint jp in CurrentTaskGroup.Position.System.JumpPoints)
             {
                 GameEntity entObj = jp;
                 SystemListObject.ListEntityType entType = SystemListObject.ListEntityType.JumpPoint;
@@ -930,9 +930,9 @@ namespace Pulsar4X.UI.Handlers
         private void AddContactsToList()
         {
 
-            if (CurrentFaction.DetectedContactLists.ContainsKey(CurrentTaskGroup.Contact.Position.System) == true)
+            if (CurrentFaction.DetectedContactLists.ContainsKey(CurrentTaskGroup.Position.System) == true)
             {
-                foreach (KeyValuePair<ShipTN, FactionContact> pair in CurrentFaction.DetectedContactLists[CurrentTaskGroup.Contact.Position.System].DetectedContacts)
+                foreach (KeyValuePair<ShipTN, FactionContact> pair in CurrentFaction.DetectedContactLists[CurrentTaskGroup.Position.System].DetectedContacts)
                 {
                     String TH = "";
                     if (pair.Value.thermal == true)
@@ -969,14 +969,14 @@ namespace Pulsar4X.UI.Handlers
         private void AddTaskGroupsToList()
         {
 
-            for (int loop = 0; loop < CurrentTaskGroup.Contact.Position.System.SystemContactList.Count; loop++)
+            for (int loop = 0; loop < CurrentTaskGroup.Position.System.SystemContactList.Count; loop++)
             {
-                if (CurrentTaskGroup.Contact.Position.System.SystemContactList[loop].SSEntity == StarSystemEntityType.TaskGroup)
+                if (CurrentTaskGroup.Position.System.SystemContactList[loop].Entity.SSEntity == StarSystemEntityType.TaskGroup)
                 {
-                    TaskGroupTN TaskGroup = CurrentTaskGroup.Contact.Position.System.SystemContactList[loop].Entity as TaskGroupTN;
+                    TaskGroupTN TaskGroup = CurrentTaskGroup.Position.System.SystemContactList[loop].Entity as TaskGroupTN;
                     if (CurrentTaskGroup != TaskGroup && TaskGroup.TaskGroupFaction == CurrentFaction)
                     {
-                        //m_oTaskGroupPanel.SystemLocationsListBox.Items.Add(CurrentTaskGroup.Contact.Position.System.SystemContactList[loop].TaskGroup);
+                        //m_oTaskGroupPanel.SystemLocationsListBox.Items.Add(CurrentTaskGroup.Position.System.SystemContactList[loop].TaskGroup);
                         string keyName = TaskGroup.Name;
                         GameEntity entObj = TaskGroup;
                         SystemListObject valueObj = new SystemListObject(SystemListObject.ListEntityType.TaskGroups, entObj);
@@ -993,12 +993,12 @@ namespace Pulsar4X.UI.Handlers
         private void AddWaypointsToList()
         {
 
-            for (int loop = 0; loop < CurrentTaskGroup.Contact.Position.System.Waypoints.Count; loop++)
+            for (int loop = 0; loop < CurrentTaskGroup.Position.System.Waypoints.Count; loop++)
             {
-                if (CurrentTaskGroup.Contact.Position.System.Waypoints[loop].FactionId == CurrentTaskGroup.TaskGroupFaction.FactionID)
-                {    //m_oTaskGroupPanel.SystemLocationsListBox.Items.Add(CurrentTaskGroup.Contact.Position.System.Waypoints[loop]);
-                    string keyName = CurrentTaskGroup.Contact.Position.System.Waypoints[loop].Name;
-                    GameEntity entObj = CurrentTaskGroup.Contact.Position.System.Waypoints[loop];
+                if (CurrentTaskGroup.Position.System.Waypoints[loop].FactionId == CurrentTaskGroup.TaskGroupFaction.FactionID)
+                {    //m_oTaskGroupPanel.SystemLocationsListBox.Items.Add(CurrentTaskGroup.Position.System.Waypoints[loop]);
+                    string keyName = CurrentTaskGroup.Position.System.Waypoints[loop].Name;
+                    GameEntity entObj = CurrentTaskGroup.Position.System.Waypoints[loop];
 
                     SystemListObject valueObj = new SystemListObject(SystemListObject.ListEntityType.Waypoints, entObj);
                     SystemLocationGuidDict.Add(entObj.Id, keyName);
@@ -1027,18 +1027,18 @@ namespace Pulsar4X.UI.Handlers
                 {
                     if (CurrentTaskGroup.TaskGroupOrders[0].target.SSEntity == StarSystemEntityType.Body)
                     {
-                        dX = CurrentTaskGroup.Contact.Position.X - (CurrentTaskGroup.TaskGroupOrders[0].target.Position.X + CurrentTaskGroup.TaskGroupOrders[0].body.Primary.Position.X);
-                        dY = CurrentTaskGroup.Contact.Position.Y - (CurrentTaskGroup.TaskGroupOrders[0].target.Position.Y + CurrentTaskGroup.TaskGroupOrders[0].body.Primary.Position.Y);
+                        dX = CurrentTaskGroup.Position.X - (CurrentTaskGroup.TaskGroupOrders[0].target.Position.X + CurrentTaskGroup.TaskGroupOrders[0].body.Primary.Position.X);
+                        dY = CurrentTaskGroup.Position.Y - (CurrentTaskGroup.TaskGroupOrders[0].target.Position.Y + CurrentTaskGroup.TaskGroupOrders[0].body.Primary.Position.Y);
                     }
                     else if (CurrentTaskGroup.TaskGroupOrders[0].target.SSEntity == StarSystemEntityType.Population)
                     {
-                        dX = CurrentTaskGroup.Contact.Position.X - (CurrentTaskGroup.TaskGroupOrders[0].target.Position.X + CurrentTaskGroup.TaskGroupOrders[0].pop.Planet.Primary.Position.X);
-                        dY = CurrentTaskGroup.Contact.Position.Y - (CurrentTaskGroup.TaskGroupOrders[0].target.Position.Y + CurrentTaskGroup.TaskGroupOrders[0].pop.Planet.Primary.Position.Y);
+                        dX = CurrentTaskGroup.Position.X - (CurrentTaskGroup.TaskGroupOrders[0].target.Position.X + CurrentTaskGroup.TaskGroupOrders[0].pop.Planet.Primary.Position.X);
+                        dY = CurrentTaskGroup.Position.Y - (CurrentTaskGroup.TaskGroupOrders[0].target.Position.Y + CurrentTaskGroup.TaskGroupOrders[0].pop.Planet.Primary.Position.Y);
                     }
                     else
                     {
-                        dX = CurrentTaskGroup.Contact.Position.X - CurrentTaskGroup.TaskGroupOrders[0].target.Position.X;
-                        dY = CurrentTaskGroup.Contact.Position.Y - CurrentTaskGroup.TaskGroupOrders[0].target.Position.Y;
+                        dX = CurrentTaskGroup.Position.X - CurrentTaskGroup.TaskGroupOrders[0].target.Position.X;
+                        dY = CurrentTaskGroup.Position.Y - CurrentTaskGroup.TaskGroupOrders[0].target.Position.Y;
                     }
 
                     dZ = Math.Sqrt((dX * dX) + (dY * dY));
@@ -1049,15 +1049,15 @@ namespace Pulsar4X.UI.Handlers
                     if (CurrentTaskGroup.IsOrbiting == true)
                         CurrentTaskGroup.GetPositionFromOrbit();
 
-                    double tX = CurrentTaskGroup.Contact.Position.X;
-                    double tY = CurrentTaskGroup.Contact.Position.Y;
+                    double tX = CurrentTaskGroup.Position.X;
+                    double tY = CurrentTaskGroup.Position.Y;
 
                     for (int loop = 0; loop < CurrentTaskGroup.TaskGroupOrders.Count; loop++)
                     {
                         if (CurrentTaskGroup.TaskGroupOrders[0].target.SSEntity == StarSystemEntityType.Body)
                         {
-                            dX = CurrentTaskGroup.Contact.Position.X - (CurrentTaskGroup.TaskGroupOrders[loop].target.Position.X + CurrentTaskGroup.TaskGroupOrders[loop].body.Primary.Position.X);
-                            dY = CurrentTaskGroup.Contact.Position.Y - (CurrentTaskGroup.TaskGroupOrders[loop].target.Position.Y + CurrentTaskGroup.TaskGroupOrders[loop].body.Primary.Position.Y);
+                            dX = CurrentTaskGroup.Position.X - (CurrentTaskGroup.TaskGroupOrders[loop].target.Position.X + CurrentTaskGroup.TaskGroupOrders[loop].body.Primary.Position.X);
+                            dY = CurrentTaskGroup.Position.Y - (CurrentTaskGroup.TaskGroupOrders[loop].target.Position.Y + CurrentTaskGroup.TaskGroupOrders[loop].body.Primary.Position.Y);
                         }
                         else if (CurrentTaskGroup.TaskGroupOrders[loop].target.SSEntity == StarSystemEntityType.Population)
                         {
@@ -1216,7 +1216,7 @@ namespace Pulsar4X.UI.Handlers
         {
             if (CurrentTaskGroup != null)
             {
-                m_oTaskGroupPanel.TaskGroupLocationTextBox.Text = CurrentTaskGroup.Contact.Position.System.Name;
+                m_oTaskGroupPanel.TaskGroupLocationTextBox.Text = CurrentTaskGroup.Position.System.Name;
                 m_oTaskGroupPanel.SetSpeedTextBox.Text = CurrentTaskGroup.CurrentSpeed.ToString();
                 m_oTaskGroupPanel.MaxSpeedTextBox.Text = CurrentTaskGroup.MaxSpeed.ToString();
 

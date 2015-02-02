@@ -212,10 +212,7 @@ namespace Pulsar4X.Entities
             Position.X = OrbitingBody.Position.X;
             Position.Y = OrbitingBody.Position.Y;
 
-            Contact.LastPosition.X = Contact.Position.X;
-            Contact.LastPosition.Y = Contact.Position.Y;
-
-            Contact.Position = Position;
+            LastPosition = Position;
 
             StartingSystem.SystemContactList.Add(Contact);
             DrawTravelLine = 3;
@@ -1174,8 +1171,8 @@ namespace Pulsar4X.Entities
         public void GetPositionFromOrbit()
         {
 #warning GetPositionFromOrbit may need reworking
-            Contact.Position.X = OrbitingBody.Position.X /*+ OrbitingBody.Primary.Position.X*/;
-            Contact.Position.Y = OrbitingBody.Position.Y /*+ OrbitingBody.Primary.Position.Y*/;
+            Position.X = OrbitingBody.Position.X /*+ OrbitingBody.Primary.Position.X*/;
+            Position.Y = OrbitingBody.Position.Y /*+ OrbitingBody.Primary.Position.Y*/;
         }
 
         /// <summary>
@@ -1183,8 +1180,8 @@ namespace Pulsar4X.Entities
         /// </summary>
         public void UpdateLastPosition()
         {
-            Contact.LastPosition.X = Contact.Position.X;
-            Contact.LastPosition.Y = Contact.Position.Y;
+            LastPosition.X = Position.X;
+            LastPosition.Y = Position.Y;
         }
 
         /// <summary>
@@ -1213,18 +1210,18 @@ namespace Pulsar4X.Entities
                 /// </summary>
                 if (TaskGroupOrders[0].target.SSEntity == StarSystemEntityType.Body)
                 {
-                    dX = Contact.Position.X - (TaskGroupOrders[0].target.Position.X + TaskGroupOrders[0].body.Primary.Position.X);
-                    dY = Contact.Position.Y - (TaskGroupOrders[0].target.Position.Y + TaskGroupOrders[0].body.Primary.Position.Y);
+                    dX = Position.X - (TaskGroupOrders[0].target.Position.X + TaskGroupOrders[0].body.Primary.Position.X);
+                    dY = Position.Y - (TaskGroupOrders[0].target.Position.Y + TaskGroupOrders[0].body.Primary.Position.Y);
                 }
                 else if (TaskGroupOrders[0].target.SSEntity == StarSystemEntityType.Population)
                 {
-                    dX = Contact.Position.X - (TaskGroupOrders[0].target.Position.X + TaskGroupOrders[0].pop.Planet.Primary.Position.X);
-                    dY = Contact.Position.Y - (TaskGroupOrders[0].target.Position.Y + TaskGroupOrders[0].pop.Planet.Primary.Position.Y);
+                    dX = Position.X - (TaskGroupOrders[0].target.Position.X + TaskGroupOrders[0].pop.Planet.Primary.Position.X);
+                    dY = Position.Y - (TaskGroupOrders[0].target.Position.Y + TaskGroupOrders[0].pop.Planet.Primary.Position.Y);
                 }
                 else
                 {
-                    dX = Contact.Position.X - TaskGroupOrders[0].target.Position.X;
-                    dY = Contact.Position.Y - TaskGroupOrders[0].target.Position.Y;
+                    dX = Position.X - TaskGroupOrders[0].target.Position.X;
+                    dY = Position.Y - TaskGroupOrders[0].target.Position.Y;
                 }
 
                 CurrentHeading = (Math.Atan((dY / dX)) / Constants.Units.RADIAN);
@@ -1247,18 +1244,18 @@ namespace Pulsar4X.Entities
                 /// </summary>
                 if (TaskGroupOrders[0].target.SSEntity == StarSystemEntityType.Body)
                 {
-                    dX = Contact.Position.X - (TaskGroupOrders[0].target.Position.X + TaskGroupOrders[0].body.Primary.Position.X);
-                    dY = Contact.Position.Y - (TaskGroupOrders[0].target.Position.Y + TaskGroupOrders[0].body.Primary.Position.Y);
+                    dX = Position.X - (TaskGroupOrders[0].target.Position.X + TaskGroupOrders[0].body.Primary.Position.X);
+                    dY = Position.Y - (TaskGroupOrders[0].target.Position.Y + TaskGroupOrders[0].body.Primary.Position.Y);
                 }
                 else if (TaskGroupOrders[0].target.SSEntity == StarSystemEntityType.Population)
                 {
-                    dX = Contact.Position.X - (TaskGroupOrders[0].target.Position.X + TaskGroupOrders[0].pop.Planet.Primary.Position.X);
-                    dY = Contact.Position.Y - (TaskGroupOrders[0].target.Position.Y + TaskGroupOrders[0].pop.Planet.Primary.Position.Y);
+                    dX = Position.X - (TaskGroupOrders[0].target.Position.X + TaskGroupOrders[0].pop.Planet.Primary.Position.X);
+                    dY = Position.Y - (TaskGroupOrders[0].target.Position.Y + TaskGroupOrders[0].pop.Planet.Primary.Position.Y);
                 }
                 else
                 {
-                    dX = Contact.Position.X - TaskGroupOrders[0].target.Position.X;
-                    dY = Contact.Position.Y - TaskGroupOrders[0].target.Position.Y;
+                    dX = Position.X - TaskGroupOrders[0].target.Position.X;
+                    dY = Position.Y - TaskGroupOrders[0].target.Position.Y;
                 }
 
                 double sign = 1.0;
@@ -1294,18 +1291,18 @@ namespace Pulsar4X.Entities
                 /// </summary>
                 if (TaskGroupOrders[0].target.SSEntity == StarSystemEntityType.Body)
                 {
-                    dX = Math.Abs((TaskGroupOrders[0].target.Position.X + TaskGroupOrders[0].body.Primary.Position.X) - Contact.Position.X);
-                    dY = Math.Abs((TaskGroupOrders[0].target.Position.Y + TaskGroupOrders[0].body.Primary.Position.Y) - Contact.Position.Y);
+                    dX = Math.Abs((TaskGroupOrders[0].target.Position.X + TaskGroupOrders[0].body.Primary.Position.X) - Position.X);
+                    dY = Math.Abs((TaskGroupOrders[0].target.Position.Y + TaskGroupOrders[0].body.Primary.Position.Y) - Position.Y);
                 }
                 else if (TaskGroupOrders[0].target.SSEntity == StarSystemEntityType.Population)
                 {
-                    dX = Math.Abs((TaskGroupOrders[0].target.Position.X + TaskGroupOrders[0].pop.Planet.Primary.Position.X) - Contact.Position.X);
-                    dY = Math.Abs((TaskGroupOrders[0].target.Position.Y + TaskGroupOrders[0].pop.Planet.Primary.Position.Y) - Contact.Position.Y);
+                    dX = Math.Abs((TaskGroupOrders[0].target.Position.X + TaskGroupOrders[0].pop.Planet.Primary.Position.X) - Position.X);
+                    dY = Math.Abs((TaskGroupOrders[0].target.Position.Y + TaskGroupOrders[0].pop.Planet.Primary.Position.Y) - Position.Y);
                 }
                 else
                 {
-                    dX = Math.Abs(TaskGroupOrders[0].target.Position.X - Contact.Position.X);
-                    dY = Math.Abs(TaskGroupOrders[0].target.Position.Y - Contact.Position.Y);
+                    dX = Math.Abs(TaskGroupOrders[0].target.Position.X - Position.X);
+                    dY = Math.Abs(TaskGroupOrders[0].target.Position.Y - Position.Y);
                 }
 
 
@@ -1430,18 +1427,18 @@ namespace Pulsar4X.Entities
                 /// </summary>
                 if (TaskGroupOrders[OrderCount].target.SSEntity == StarSystemEntityType.Body)
                 {
-                    dX = Math.Abs((TaskGroupOrders[OrderCount].target.Position.X + TaskGroupOrders[OrderCount].body.Primary.Position.X) - Contact.Position.X);
-                    dY = Math.Abs((TaskGroupOrders[OrderCount].target.Position.Y + TaskGroupOrders[OrderCount].body.Primary.Position.Y) - Contact.Position.Y);
+                    dX = Math.Abs((TaskGroupOrders[OrderCount].target.Position.X + TaskGroupOrders[OrderCount].body.Primary.Position.X) - Position.X);
+                    dY = Math.Abs((TaskGroupOrders[OrderCount].target.Position.Y + TaskGroupOrders[OrderCount].body.Primary.Position.Y) - Position.Y);
                 }
                 else if (TaskGroupOrders[OrderCount].target.SSEntity == StarSystemEntityType.Population)
                 {
-                    dX = Math.Abs((TaskGroupOrders[OrderCount].target.Position.X + TaskGroupOrders[OrderCount].pop.Planet.Primary.Position.X) - Contact.Position.X);
-                    dY = Math.Abs((TaskGroupOrders[OrderCount].target.Position.Y + TaskGroupOrders[OrderCount].pop.Planet.Primary.Position.Y) - Contact.Position.Y);
+                    dX = Math.Abs((TaskGroupOrders[OrderCount].target.Position.X + TaskGroupOrders[OrderCount].pop.Planet.Primary.Position.X) - Position.X);
+                    dY = Math.Abs((TaskGroupOrders[OrderCount].target.Position.Y + TaskGroupOrders[OrderCount].pop.Planet.Primary.Position.Y) - Position.Y);
                 }
                 else
                 {
-                    dX = Math.Abs(TaskGroupOrders[OrderCount].target.Position.X - Contact.Position.X);
-                    dY = Math.Abs(TaskGroupOrders[OrderCount].target.Position.Y - Contact.Position.Y);
+                    dX = Math.Abs(TaskGroupOrders[OrderCount].target.Position.X - Position.X);
+                    dY = Math.Abs(TaskGroupOrders[OrderCount].target.Position.Y - Position.Y);
                 }
 
             }
@@ -1564,7 +1561,6 @@ namespace Pulsar4X.Entities
                         dY = TaskGroupOrders[0].target.Position.Y;
                     }
 
-                    Contact.UpdateLocationInSystem(dX, dY);
                     TotalOrderDistance = TotalOrderDistance - (double)(CurrentSpeed * TimeRequirement);
 
                     /// <summary>
@@ -1630,7 +1626,7 @@ namespace Pulsar4X.Entities
                             {
                                 String Entry = String.Format("Ship Error, no TaskGroupsOrdered found for TG {0} in Faction {1}, {2} has completed an order to move.", TaskGroupOrders[0].taskGroup.Name,
                                     TaskGroupOrders[0].taskGroup.TaskGroupFaction.Name, Name);
-                                MessageEntry NME = new MessageEntry(MessageEntry.MessageType.Error, Contact.Position.System, Contact, GameState.Instance.GameDateTime, GameState.Instance.CurrentSecond, Entry);
+                                MessageEntry NME = new MessageEntry(MessageEntry.MessageType.Error, Position.System, this, GameState.Instance.GameDateTime, GameState.Instance.CurrentSecond, Entry);
                                 TaskGroupFaction.MessageLog.Add(NME);
                             }
                         }
@@ -1652,8 +1648,8 @@ namespace Pulsar4X.Entities
             else
             {
 
-                Contact.Position.X = Contact.Position.X + (((double)TimeSlice * CurrentSpeedX) / Constants.Units.KM_PER_AU);
-                Contact.Position.Y = Contact.Position.Y + (((double)TimeSlice * CurrentSpeedY) / Constants.Units.KM_PER_AU);
+                Position.X = Position.X + (((double)TimeSlice * CurrentSpeedX) / Constants.Units.KM_PER_AU);
+                Position.Y = Position.Y + (((double)TimeSlice * CurrentSpeedY) / Constants.Units.KM_PER_AU);
 
                 TotalOrderDistance = TotalOrderDistance - (double)((CurrentSpeed * TimeSlice) / Constants.Units.KM_PER_AU);
 
@@ -2292,7 +2288,6 @@ namespace Pulsar4X.Entities
                                 newPos.System.SystemContactList.Add(Contact);
 
                                 Position = newPos;
-                                Contact.UpdateLocationAfterTransit();
 
                                 /// <summary>
                                 /// Handle PDList stuff.
@@ -2341,7 +2336,6 @@ namespace Pulsar4X.Entities
                                 newPos.System.SystemContactList.Add(Contact);
 
                                 Position = newPos;
-                                Contact.UpdateLocationAfterTransit();
 
                                 /// <summary>
                                 /// Handle PDList stuff.
@@ -2392,7 +2386,7 @@ namespace Pulsar4X.Entities
             if (TaskGroupOrders.Count > 0)
             {
                 if ((TaskGroupOrders[0].target.SSEntity == StarSystemEntityType.Body || TaskGroupOrders[0].target.SSEntity == StarSystemEntityType.Population)
-                    && (Contact.Position.X == TaskGroupOrders[0].target.Position.X && Contact.Position.Y == TaskGroupOrders[0].target.Position.Y))
+                    && (Contact.Entity.Position.X == TaskGroupOrders[0].target.Position.X && Contact.Entity.Position.Y == TaskGroupOrders[0].target.Position.Y))
                 {
                     IsOrbiting = true;
 
@@ -2862,9 +2856,9 @@ namespace Pulsar4X.Entities
 
             ShipTN min = null;
             float minDist = -1.0f;
-            if (TaskGroupFaction.DetectedContactLists.ContainsKey(Contact.Position.System))
+            if (TaskGroupFaction.DetectedContactLists.ContainsKey(Contact.Entity.Position.System))
             {
-                foreach (KeyValuePair<ShipTN, FactionContact> pair in TaskGroupFaction.DetectedContactLists[Contact.Position.System].DetectedContacts)
+                foreach (KeyValuePair<ShipTN, FactionContact> pair in TaskGroupFaction.DetectedContactLists[Contact.Entity.Position.System].DetectedContacts)
                 {
                     /// <summary>
                     /// Only active targets are considered for this. Is this for BFC targeting, or general things to head for?
@@ -2874,7 +2868,7 @@ namespace Pulsar4X.Entities
                     {
                         float dist;
 
-                        Contact.DistTable.GetDistance(pair.Key.ShipsTaskGroup.Contact, out dist);
+                        Contact.Entity.DistTable.GetDistance(pair.Key.ShipsTaskGroup, out dist);
 
                         if (dist < minDist || min == null)
                         {
@@ -2889,6 +2883,12 @@ namespace Pulsar4X.Entities
         }
         #endregion
 
+
+        internal int GetMaxSubpulse(int subpulseTime)
+        {
+            // For now, just give our time for orders.
+            return Math.Min((int)TimeRequirement, subpulseTime);
+        }
     }
     /// <summary>
     /// End TaskGroupTN

@@ -575,15 +575,6 @@ namespace Pulsar4X.Entities
         #endregion
 
         /// <summary>
-        /// I am not sure if this will be necessary but since the population has detection statistics it should have a contact with an accessible
-        /// location to the SystemContactList.
-        /// </summary>
-        public void UpdateLocation()
-        {
-            Contact.UpdateLocationInSystem(Planet.Position.X, Planet.Position.Y);
-        }
-
-        /// <summary>
         /// How long does it take to load or unload from this population?
         /// </summary>
         /// <param name="TaskGroupTime">Time that the taskgroup will take barring any planetary modifiers. this is calculated beforehand.</param>
@@ -1036,5 +1027,11 @@ namespace Pulsar4X.Entities
             }
         }
         #endregion
+
+        internal int GetMaxSubpulse(int subpulseTime)
+        {
+            // TODO: COMPLETE. Need more info on BuildQueue
+            return subpulseTime;
+        }
     }
 }

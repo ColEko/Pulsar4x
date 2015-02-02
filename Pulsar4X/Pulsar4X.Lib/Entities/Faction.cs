@@ -104,7 +104,7 @@ namespace Pulsar4X.Entities
             /// <summary>
             /// Print to the message log.
             /// </summary>
-            MessageEntry NMsg = new MessageEntry(MessageEntry.MessageType.ContactNew, DetectedShip.ShipsTaskGroup.Contact.Position.System, DetectedShip.ShipsTaskGroup.Contact,
+            MessageEntry NMsg = new MessageEntry(MessageEntry.MessageType.ContactNew, DetectedShip.ShipsTaskGroup.Position.System, DetectedShip.ShipsTaskGroup,
                                                  GameState.Instance.GameDateTime, GameState.Instance.LastTimestep, Contact);
 
             CurrentFaction.MessageLog.Add(NMsg);
@@ -152,7 +152,7 @@ namespace Pulsar4X.Entities
                 else
                 {
                     Contact = String.Format("Error with {0} : has EM signature but no active sensor.", Contact);
-                    NMsg = new MessageEntry(MessageEntry.MessageType.Error, DetectedMissileGroup.contact.Position.System, DetectedMissileGroup.contact,
+                    NMsg = new MessageEntry(MessageEntry.MessageType.Error, DetectedMissileGroup.Position.System, DetectedMissileGroup,
                                                  GameState.Instance.GameDateTime, GameState.Instance.LastTimestep, Contact);
 
                     CurrentFaction.MessageLog.Add(NMsg);
@@ -169,7 +169,7 @@ namespace Pulsar4X.Entities
             /// <summary>
             /// print to the message log.
             /// </summary>
-            NMsg = new MessageEntry(MessageEntry.MessageType.ContactNew, DetectedMissileGroup.contact.Position.System, DetectedMissileGroup.contact,
+            NMsg = new MessageEntry(MessageEntry.MessageType.ContactNew, DetectedMissileGroup.Position.System, DetectedMissileGroup,
                                                  GameState.Instance.GameDateTime, GameState.Instance.LastTimestep, Contact);
 
             CurrentFaction.MessageLog.Add(NMsg);
@@ -310,7 +310,7 @@ namespace Pulsar4X.Entities
             else if (missileGroup == null)
                 SysCon = ship.ShipsTaskGroup.Contact;
 
-            MessageEntry NMsg = new MessageEntry(type, SysCon.Position.System, SysCon,
+            MessageEntry NMsg = new MessageEntry(type, SysCon.Entity.Position.System, SysCon.Entity,
                                                  GameState.Instance.GameDateTime, GameState.Instance.LastTimestep, Contact);
 
             CurrentFaction.MessageLog.Add(NMsg);
@@ -1225,7 +1225,7 @@ namespace Pulsar4X.Entities
             #region Faction Taskgroup Loop
             foreach(TaskGroupTN CurrentTaskGroup in TaskGroups)
             {
-                StarSystem System = CurrentTaskGroup.Contact.Position.System;
+                StarSystem System = CurrentTaskGroup.Position.System;
                 /// <summary>
                 /// Loop through the global contacts list for the system. thermal.Count is equal to SystemContacts.Count. or should be.
                 /// </summary>
@@ -1240,12 +1240,12 @@ namespace Pulsar4X.Entities
                         float dist;
 
                         // Check to see if our distance table is updated for this contact.
-                        if (!CurrentTaskGroup.Contact.DistTable.GetDistance(System.SystemContactList[detListIterator], out dist))
+                        if (!CurrentTaskGroup.DistTable.GetDistance(System.SystemContactList[detListIterator].Entity, out dist))
                         {
                             /// <summary>
                             /// Handle fleet interception check here.
                             /// </summary>
-                            if (GameState.SE.FleetInterceptionPreemptTick != GameState.Instance.CurrentSecond && System.SystemContactList[detListIterator].SSEntity == StarSystemEntityType.TaskGroup)
+                            if (GameState.SE.FleetInterceptionPreemptTick != GameState.Instance.CurrentSecond && System.SystemContactList[detListIterator].Entity.SSEntity == StarSystemEntityType.TaskGroup)
                             {
                                 TaskGroupTN TaskGroup = System.SystemContactList[detListIterator].Entity as TaskGroupTN;
                                 /// <summary>
@@ -1278,7 +1278,7 @@ namespace Pulsar4X.Entities
                                     GameState.SE.FleetInterceptionPreemptTick = GameState.Instance.CurrentSecond;
 
                                     GameState.SE.AddFleetToPreemptList(CurrentTaskGroup);
-                                    if (System.SystemContactList[detListIterator].SSEntity == StarSystemEntityType.TaskGroup)
+                                    if (System.SystemContactList[detListIterator].Entity.SSEntity == StarSystemEntityType.TaskGroup)
                                     {
 
                                         GameState.SE.AddFleetToPreemptList(TaskGroup);
@@ -1298,7 +1298,7 @@ namespace Pulsar4X.Entities
                         /// <summary>
                         /// Handle population detection
                         /// </summary>
-                        if (System.SystemContactList[detListIterator].SSEntity == StarSystemEntityType.Population)
+                        if (System.SystemContactList[detListIterator].Entity.SSEntity == StarSystemEntityType.Population)
                         {
                             Population Pop = System.SystemContactList[detListIterator].Entity as Population;
                             sig = Pop.ThermalSignature;
@@ -1346,7 +1346,7 @@ namespace Pulsar4X.Entities
                                 System.FactionDetectionLists[FactionID].Active[detListIterator] = GameState.Instance.CurrentSecond;
                             }
                         }
-                        else if (System.SystemContactList[detListIterator].SSEntity == StarSystemEntityType.TaskGroup)
+                        else if (System.SystemContactList[detListIterator].Entity.SSEntity == StarSystemEntityType.TaskGroup)
                         {
                             TaskGroupTN TaskGroupToTest = System.SystemContactList[detListIterator].Entity as TaskGroupTN;
 
@@ -1376,7 +1376,7 @@ namespace Pulsar4X.Entities
                             
 
                         }
-                        else if (System.SystemContactList[detListIterator].SSEntity == StarSystemEntityType.Missile)
+                        else if (System.SystemContactList[detListIterator].Entity.SSEntity == StarSystemEntityType.Missile)
                         {
                             OrdnanceGroupTN MissileGroup = System.SystemContactList[detListIterator].Entity as OrdnanceGroupTN;
 
@@ -1555,7 +1555,7 @@ namespace Pulsar4X.Entities
                 if (MissileGroups[loop].missiles.Count == 0)
                 {
                     String ErrorMessage = string.Format("Missile group {0} has no missiles and is still in the list of missile groups.", MissileGroups[loop].Name);
-                    MessageEntry NMsg = new MessageEntry(MessageEntry.MessageType.Error, MissileGroups[loop].contact.Position.System, MissileGroups[loop].contact,
+                    MessageEntry NMsg = new MessageEntry(MessageEntry.MessageType.Error, MissileGroups[loop].Position.System, MissileGroups[loop],
                                                  GameState.Instance.GameDateTime, GameState.Instance.LastTimestep, ErrorMessage);
 
                     MessageLog.Add(NMsg);
@@ -1565,7 +1565,7 @@ namespace Pulsar4X.Entities
                 /// <summary>
                 /// Missile groups have homogeneous missile complements, so will only have 1 of each sensor to check against.
                 /// </summary>
-                StarSystem System = MissileGroups[loop].contact.Position.System;
+                StarSystem System = MissileGroups[loop].Position.System;
                 OrdnanceTN Missile = MissileGroups[loop].missiles[0];
 
                 /// <summary>
@@ -1587,7 +1587,7 @@ namespace Pulsar4X.Entities
                         (Missile.missileDef.thermalStr != 0.0f || Missile.missileDef.eMStr != 0.0f || Missile.missileDef.activeStr != 0.0f))
                     {
                         float dist;
-                        TaskGroups[loop].Contact.DistTable.GetDistance(System.SystemContactList[loop2], out dist);
+                        TaskGroups[loop].DistTable.GetDistance(System.SystemContactList[loop2].Entity, out dist);
 
                         /// <summary>
                         /// Now to find the biggest thermal signature in the contact. The biggest for planets is just the planetary pop itself since
@@ -1600,7 +1600,7 @@ namespace Pulsar4X.Entities
                         /// Check for each detection method whether or not this missile can actually detect things, then copy the taskgroup detection code here.
                         /// Update detected contacts as needed:
                         /// </summary>
-                        if (System.SystemContactList[loop2].SSEntity == StarSystemEntityType.Population)
+                        if (System.SystemContactList[loop2].Entity.SSEntity == StarSystemEntityType.Population)
                         {
                             #region Planetary detection by missiles
                             Population Pop = System.SystemContactList[loop2].Entity as Population;
@@ -1665,7 +1665,7 @@ namespace Pulsar4X.Entities
                             }
                             #endregion
                         }
-                        else if (System.SystemContactList[loop2].SSEntity == StarSystemEntityType.TaskGroup)
+                        else if (System.SystemContactList[loop2].Entity.SSEntity == StarSystemEntityType.TaskGroup)
                         {
                             TaskGroupTN TaskGroup = System.SystemContactList[loop2].Entity as TaskGroupTN;
 
@@ -1779,7 +1779,7 @@ namespace Pulsar4X.Entities
                                                         /// This should not happen.
                                                         /// </summary>
                                                         String ErrorMessage = string.Format("Partial Thermal detect for missiles looped through every ship. {0} {1} {2} {3}", dist, detection, noDetection, allDetection);
-                                                        MessageEntry NMsg = new MessageEntry(MessageEntry.MessageType.Error, MissileGroups[loop].contact.Position.System, MissileGroups[loop].contact,
+                                                        MessageEntry NMsg = new MessageEntry(MessageEntry.MessageType.Error, MissileGroups[loop].Position.System, MissileGroups[loop],
                                                                                              GameState.Instance.GameDateTime, GameState.Instance.LastTimestep, ErrorMessage);
                                                         MessageLog.Add(NMsg);
                                                         done = true;
@@ -1917,7 +1917,7 @@ namespace Pulsar4X.Entities
                                                         /// This should not happen.
                                                         /// </summary>
                                                         String ErrorMessage = string.Format("Partial EM detect for missiles looped through every ship. {0} {1} {2} {3}", dist, detection, noDetection, allDetection);
-                                                        MessageEntry NMsg = new MessageEntry(MessageEntry.MessageType.Error, MissileGroups[loop].contact.Position.System, MissileGroups[loop].contact,
+                                                        MessageEntry NMsg = new MessageEntry(MessageEntry.MessageType.Error, MissileGroups[loop].Position.System, MissileGroups[loop],
                                                                                              GameState.Instance.GameDateTime, GameState.Instance.LastTimestep, ErrorMessage);
                                                         MessageLog.Add(NMsg);
                                                         done = true;
@@ -2031,7 +2031,7 @@ namespace Pulsar4X.Entities
                                                         /// This should not happen.
                                                         /// </summary>
                                                         String ErrorMessage = string.Format("Partial Active detect for missiles looped through every ship. {0} {1} {2} {3}", dist, detection, noDetection, allDetection);
-                                                        MessageEntry NMsg = new MessageEntry(MessageEntry.MessageType.Error, MissileGroups[loop].contact.Position.System, MissileGroups[loop].contact,
+                                                        MessageEntry NMsg = new MessageEntry(MessageEntry.MessageType.Error, MissileGroups[loop].Position.System, MissileGroups[loop],
                                                                                              GameState.Instance.GameDateTime, GameState.Instance.LastTimestep, ErrorMessage);
                                                         MessageLog.Add(NMsg);
                                                         done = true;
@@ -2047,7 +2047,7 @@ namespace Pulsar4X.Entities
                                 #endregion
                             }
                         }
-                        else if (System.SystemContactList[loop2].SSEntity == StarSystemEntityType.Missile)
+                        else if (System.SystemContactList[loop2].Entity.SSEntity == StarSystemEntityType.Missile)
                         {
                             OrdnanceGroupTN MissileGroup = System.SystemContactList[loop2].Entity as OrdnanceGroupTN;
 
@@ -2189,7 +2189,7 @@ namespace Pulsar4X.Entities
             for (int loop3 = 0; loop3 < DetShipList.Count; loop3++)
             {
                 ShipTN detectedShip = DetShipList[loop3];
-                StarSystem System = detectedShip.ShipsTaskGroup.Contact.Position.System;
+                StarSystem System = detectedShip.ShipsTaskGroup.Position.System;
 
                 /// <summary>
                 /// Sanity check to keep allied ships out of the DetectedContacts list.
@@ -2242,7 +2242,7 @@ namespace Pulsar4X.Entities
             for (int loop3 = 0; loop3 < DetMissileList.Count; loop3++)
             {
                 OrdnanceTN Missile = DetMissileList[loop3].missiles[0];
-                StarSystem System = DetMissileList[loop3].contact.Position.System;
+                StarSystem System = DetMissileList[loop3].Position.System;
 
                 /// <summary>
                 /// Sanity check to keep allied missiles out of the DetectedContacts list.
@@ -2498,7 +2498,7 @@ namespace Pulsar4X.Entities
                                     /// This should not happen.
                                     /// </summary>
                                     String ErrorMessage = string.Format("Partial Thermal detect for TGs looped through every ship. {0} {1} {2} {3}", dist, detection, noDetection, allDetection);
-                                    MessageEntry NMsg = new MessageEntry(MessageEntry.MessageType.Error, TaskGroupToTest.Contact.Position.System, TaskGroupToTest.Contact,
+                                    MessageEntry NMsg = new MessageEntry(MessageEntry.MessageType.Error, TaskGroupToTest.Position.System, TaskGroupToTest,
                                                                          GameState.Instance.GameDateTime, GameState.Instance.LastTimestep, ErrorMessage);
                                     MessageLog.Add(NMsg);
                                     done = true;
@@ -2678,7 +2678,7 @@ namespace Pulsar4X.Entities
                                     /// </summary>
                                     String ErrorMessage = string.Format("Partial EM detect for TGs looped through every ship. {0} {1} {2} {3}", dist, detection, noDetection, allDetection);
 
-                                    MessageEntry NMsg = new MessageEntry(MessageEntry.MessageType.Error, CurrentTaskGroup.Contact.Position.System, CurrentTaskGroup.Contact,
+                                    MessageEntry NMsg = new MessageEntry(MessageEntry.MessageType.Error, CurrentTaskGroup.Position.System, CurrentTaskGroup,
                                                                          GameState.Instance.GameDateTime, GameState.Instance.LastTimestep, ErrorMessage);
                                     MessageLog.Add(NMsg);
                                     done = true;
@@ -2824,7 +2824,7 @@ namespace Pulsar4X.Entities
                                     /// </summary>
                                     String ErrorMessage = string.Format("Partial Active detect for TGs looped through every ship. {0} {1} {2} {3}", dist, detection, noDetection, allDetection);
 
-                                    MessageEntry NMsg = new MessageEntry(MessageEntry.MessageType.Error, CurrentTaskGroup.Contact.Position.System, CurrentTaskGroup.Contact,
+                                    MessageEntry NMsg = new MessageEntry(MessageEntry.MessageType.Error, CurrentTaskGroup.Position.System, CurrentTaskGroup,
                                                                          GameState.Instance.GameDateTime, GameState.Instance.LastTimestep, ErrorMessage);
                                     MessageLog.Add(NMsg);
                                     done = true;
