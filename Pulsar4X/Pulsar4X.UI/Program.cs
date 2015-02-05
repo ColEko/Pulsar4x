@@ -31,7 +31,7 @@ namespace Pulsar4X.UI
 #endif
 
             // gen star system:
-            Entities.StarSystem otest = GameState.Instance.StarSystemFactory.Create("FuckYouScott");
+            Entities.StarSystem otest = GameState.Instance.StarSystemFactory.Create("Test");
             GameState.Instance.StarSystemCurrentIndex++;
             GameState.Instance.StarSystemFactory.Create("Foo");
             GameState.Instance.StarSystemCurrentIndex++;
